@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
-import 'package:tetas_in/src/view/pages/home_screen.dart';
+import 'package:tetas_in/src/view/pages/base_screen.dart';
 import 'package:tetas_in/src/view/pages/signup_screen.dart';
 import 'package:tetas_in/src/view/widgets/background.dart';
 import 'package:tetas_in/src/view/widgets/forgot_pass_widget.dart';
@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
+                            builder: (context) => BaseScreen(),
                           ));
                     },
                     style: ElevatedButton.styleFrom(

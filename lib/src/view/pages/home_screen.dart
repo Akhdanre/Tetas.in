@@ -209,26 +209,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.camera),
-              label: 'Evolution',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Controller',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.history_edu_outlined),
-              label: 'History',
-            ),
-          ]),
     );
   }
 }
