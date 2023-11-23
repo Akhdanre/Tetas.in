@@ -24,14 +24,13 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
         child: Background(
           screen: screen,
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                vertical: screen.vertical2, horizontal: screen.horizontal2),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const Align(
                     child: Text(
-                  "evolution",
+                  "Evolution",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 )),
                 Container(
