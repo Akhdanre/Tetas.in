@@ -1,9 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/view/widgets/background.dart';
+import 'package:tetas_in/src/view/widgets/status_info_inku_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,6 +14,11 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String user = "Akeon";
   String idIncubator = "IND00001";
+  int day = 15;
+  String dueDate = "12-12-2023";
+  int temp = 38;
+  int humd = 38;
+  int water = 38;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +32,7 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.symmetric(
                   horizontal: screen.horizontal4, vertical: screen.vertical2),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -64,7 +69,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 70,
                         width: 70,
                         decoration: const BoxDecoration(
-                            color: Colors.white, shape: BoxShape.circle),
+                            image: DecorationImage(
+                                image: AssetImage("Assets/user_image.png"),
+                                fit: BoxFit.cover),
+                            color: Colors.white,
+                            shape: BoxShape.circle),
                       )
                     ],
                   ),
@@ -72,10 +81,35 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: screen.vertical2,
                   ),
                   Container(
-                    height: 400,
+                    height: 350,
                     decoration: BoxDecoration(
-                        color: Colors.white,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 1,
+                            blurRadius: 4,
+                            offset: const Offset(1.5, 5),
+                          )
+                        ],
+                        color: baseColorBg,
                         borderRadius: BorderRadius.circular(20)),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20, vertical: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Align(child: Image.asset("Assets/egg_image_15.png")),
+                          Text("Day $day",
+                              style: const TextStyle(
+                                  fontSize: 25, fontWeight: FontWeight.bold)),
+                          Text(
+                            "Due date : $dueDate",
+                            style: const TextStyle(fontWeight: FontWeight.w300),
+                          )
+                        ],
+                      ),
+                    ),
                   ),
                   SizedBox(
                     height: screen.vertical2,
@@ -83,37 +117,72 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
-                        width: 100,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            color: yellowString,
-                            borderRadius: BorderRadius.circular(10)),
+                      StatusInfoInku(
+                        value: temp,
+                        title: 'Temperature',
                       ),
-                      Container(
-                        width: 100,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            color: yellowString,
-                            borderRadius: BorderRadius.circular(10)),
+                      StatusInfoInku(
+                        value: humd,
+                        title: 'Humidty',
                       ),
-                      Container(
-                        width: 100,
-                        height: 150,
-                        decoration: BoxDecoration(
-                            color: yellowString,
-                            borderRadius: BorderRadius.circular(10)),
-                      )
+                      StatusInfoInku(
+                        value: water,
+                        title: 'Water',
+                      ),
                     ],
                   ),
                   SizedBox(
                     height: screen.vertical2,
                   ),
                   Container(
-                    height: 100,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: baseColorBg,
                       borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 4,
+                          offset: const Offset(2, 5),
+                        )
+                      ],
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Column(
+                        children: [
+                          const Text(
+                            "Progress to hatch",
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          SliderTheme(
+                              data: SliderTheme.of(context).copyWith(
+                                  activeTrackColor: yellowString,
+                                  trackHeight: 20,
+                                  thumbColor: Colors.transparent,
+                                  thumbShape: const RoundSliderThumbShape(
+                                      enabledThumbRadius: 0.0)),
+                              child: Stack(
+                                children: [
+                                  Slider(
+                                      max: 100,
+                                      value: 20,
+                                      inactiveColor: grayTransparentString,
+                                      onChanged: (value) {}),
+                                  const Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 16, horizontal: 40),
+                                    child: Text(
+                                      "12%",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                        ],
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -122,8 +191,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   Container(
                     height: 200,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: baseColorBg,
                       borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          spreadRadius: 1,
+                          blurRadius: 4,
+                          offset: const Offset(2, 5),
+                        )
+                      ],
                     ),
                   ),
                 ],
