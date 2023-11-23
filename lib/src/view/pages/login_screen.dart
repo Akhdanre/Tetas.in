@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
+import 'package:tetas_in/src/view/pages/signup_screen.dart';
 import 'package:tetas_in/src/view/widgets/background.dart';
+import 'package:tetas_in/src/view/widgets/forgot_pass_widget.dart';
+import 'package:tetas_in/src/view/widgets/regard_widget.dart';
 import 'package:tetas_in/src/view/widgets/text_form_field_custom.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -24,18 +27,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: screen.vertical2,
-              ),
-              const Text("HI!\nWELCOME",
-                  style: TextStyle(fontSize: 45, fontWeight: FontWeight.w900)),
-              const Text(
-                "Please enter your account",
-                style: TextStyle(fontWeight: FontWeight.w300),
-              ),
-              SizedBox(
-                height: screen.vertical3,
-              ),
+              Regards(screen: screen),
               const Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -63,18 +55,8 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(
                 height: 20,
               ),
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Text(
-                  "Forgot password?",
-                  style: TextStyle(
-                    color: blueString,
-                  ),
-                ),
-              ),
+              const ForgotPassTextWidget(),
               const Spacer(),
-              // Align(
-              //   alignment: Alignment.bottomCenter,
               Column(
                 children: [
                   ElevatedButton(
@@ -83,18 +65,30 @@ class _LoginScreenState extends State<LoginScreen> {
                         shape: const StadiumBorder(),
                         backgroundColor: yellowString,
                         minimumSize: const Size.fromHeight(40)),
-                    child: const Text("LOGIN"),
+                    child: const Text(
+                      "LOGIN",
+                      style: TextStyle(color: Colors.black, fontSize: 18),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Don't have an account? "),
-                      Text(
-                        "Sign Up",
-                        style: TextStyle(color: blueString),
+                      const Text("Don't have an account? "),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const SignUpScreen(),
+                              ));
+                        },
+                        child: const Text(
+                          "Sign Up",
+                          style: TextStyle(color: blueString),
+                        ),
                       ),
                     ],
                   ),
