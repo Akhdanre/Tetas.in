@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tetas_in/src/view/pages/controller_screen.dart';
+import 'package:tetas_in/src/view/pages/evolution_screen.dart';
 import 'package:tetas_in/src/view/pages/home_screen.dart';
 
 class BaseScreen extends StatefulWidget {
@@ -12,7 +13,7 @@ class BaseScreen extends StatefulWidget {
 class _BaseScreenState extends State<BaseScreen> {
   final List<Widget> _pages = [
     const HomeScreen(),
-    Center(child: Text("Evolution")),
+    const EvolutionScreen(),
     const ControllerScreen(),
     Center(child: Text("History")),
   ];
