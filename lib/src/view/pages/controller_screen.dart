@@ -11,8 +11,8 @@ class ControllerScreen extends StatefulWidget {
 }
 
 class _ControllerScreenState extends State<ControllerScreen> {
-  double temp_limit = 30.0;
-  double humd_limit = 40.0;
+  double tempLimit = 30.0;
+  double humdLimit = 40.0;
   String description =
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus facilisis non mauris id sodales. Maecenas id tincidunt ligula. Fusce leo dui, accumsan at leo sit amet, lobortis interdum felis.v";
 
@@ -72,12 +72,12 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                           elevation: 0,
                                           enabledThumbRadius: 10.0)),
                                   child: Slider(
-                                      value: temp_limit,
+                                      value: tempLimit,
                                       max: 50,
                                       min: 25,
                                       onChanged: (value) {
                                         setState(() {
-                                          temp_limit = value;
+                                          tempLimit = value;
                                         });
                                       })),
                             ],
@@ -119,12 +119,12 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                           elevation: 0,
                                           enabledThumbRadius: 10.0)),
                                   child: Slider(
-                                      value: humd_limit,
+                                      value: humdLimit,
                                       max: 100,
                                       min: 0,
                                       onChanged: (value) {
                                         setState(() {
-                                          humd_limit = value;
+                                          humdLimit = value;
                                         });
                                       })),
                             ],

@@ -11,8 +11,8 @@ class HistoryScreen extends StatefulWidget {
 }
 
 class _HistoryScreenState extends State<HistoryScreen> {
-  int temp_value = 10;
-  int humd_value = 10;
+  int tempValue = 10;
+  int humdValue = 10;
   @override
   Widget build(BuildContext context) {
     SizeConfig screen = SizeConfig(context);
@@ -51,7 +51,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       ),
                     ],
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: const Row(
                     children: [
                       Expanded(
@@ -92,30 +92,26 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             Text("Humadity"),
                           ],
                         ),
-                        Container(
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: 5,
-                            itemBuilder: (context, index) => Container(
-                              child: Column(
+                        ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: 5,
+                          itemBuilder: (context, index) => Column(
+                            children: [
+                              const Divider(
+                                color: Colors.black,
+                                height: 20,
+                                thickness: 2,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Divider(
-                                    color: Colors.black,
-                                    height: 20,
-                                    thickness: 2,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text("${index + 1}"),
-                                      Text("${temp_value}"),
-                                      Text("${humd_value}"),
-                                    ],
-                                  ),
+                                  Text("${index + 1}"),
+                                  Text("$tempValue"),
+                                  Text("$humdValue"),
                                 ],
                               ),
-                            ),
+                            ],
                           ),
                         ),
                       ],

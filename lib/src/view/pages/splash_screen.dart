@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tetas_in/src/bussines_logic/cubit/login_cubit.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/view/pages/login_screen.dart';
 import 'package:tetas_in/src/view/widgets/background.dart';
@@ -6,16 +8,21 @@ import 'package:tetas_in/src/view/widgets/background.dart';
 class SplashScreenPage extends StatelessWidget {
   const SplashScreenPage({super.key});
 
+  void goToLoginPage(context) => Future.delayed(const Duration(seconds: 3), () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => BlocProvider(
+                    create: (context) => LoginCubit(),
+                    child: const LoginScreen(),
+                  )),
+        );
+      });
+
   @override
   Widget build(BuildContext context) {
     SizeConfig screen = SizeConfig(context);
-
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
-      );
-    });
+    goToLoginPage(context);
     return Scaffold(
       body: SafeArea(
         child: Background(

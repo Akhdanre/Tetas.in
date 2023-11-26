@@ -33,7 +33,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                   "Evolution",
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 )),
-                Container(
+                SizedBox(
                   height: 80,
                   width: screen.widht,
                   child: ListView.builder(

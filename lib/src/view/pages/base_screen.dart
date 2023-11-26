@@ -5,7 +5,7 @@ import 'package:tetas_in/src/view/pages/history_screen.dart';
 import 'package:tetas_in/src/view/pages/home_screen.dart';
 
 class BaseScreen extends StatefulWidget {
-  BaseScreen({super.key});
+  const BaseScreen({super.key});
 
   @override
   State<BaseScreen> createState() => _BaseScreenState();
@@ -31,10 +31,6 @@ class _BaseScreenState extends State<BaseScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages.elementAt(selectedIndex),
-      // IndexedStack(
-      //   index: selectedIndex,
-      //   children: _pages,
-      // ),
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.black,

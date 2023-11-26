@@ -65,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => BaseScreen(),
+                            builder: (context) => const BaseScreen(),
                           ));
                     },
                     style: ElevatedButton.styleFrom(
