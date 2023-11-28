@@ -12,6 +12,7 @@ class BaseScreen extends StatefulWidget {
 }
 
 class _BaseScreenState extends State<BaseScreen> {
+  int selectedIndex = 0;
   final List<Widget> _pages = [
     const HomeScreen(),
     const EvolutionScreen(),
@@ -19,7 +20,6 @@ class _BaseScreenState extends State<BaseScreen> {
     const HistoryScreen()
   ];
 
-  int selectedIndex = 0;
 
   void changeIndex(int value) {
     setState(() {

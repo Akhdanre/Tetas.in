@@ -36,6 +36,7 @@ dependencies:
   flutter_svg: ^2.0.9
   bloc: ^8.0.0
   flutter_bloc: ^8.0.0
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

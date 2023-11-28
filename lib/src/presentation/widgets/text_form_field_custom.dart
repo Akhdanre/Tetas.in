@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class TextFieldCustom extends StatelessWidget {
-  const TextFieldCustom({super.key, required this.hintTxt});
+  const TextFieldCustom(
+      {super.key, required this.hintTxt, required this.controller});
 
   final String hintTxt;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -11,18 +13,11 @@ class TextFieldCustom extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(15),
-        // boxShadow: [
-        //   BoxShadow(
-        //     color: Colors.grey.withOpacity(0.5),
-        //     spreadRadius: 1,
-        //     blurRadius: 4,
-        //     offset: const Offset(2, 5),
-        //   )
-        // ],
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15),
         child: TextField(
+          controller: controller,
           decoration:
               InputDecoration(border: InputBorder.none, hintText: hintTxt),
         ),

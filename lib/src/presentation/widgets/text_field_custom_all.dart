@@ -3,10 +3,14 @@ import 'package:tetas_in/src/presentation/widgets/text_form_field_custom.dart';
 
 class TextFieldCustomAll extends StatelessWidget {
   const TextFieldCustomAll(
-      {super.key, required this.title, required this.textHint});
+      {super.key,
+      required this.title,
+      required this.textHint,
+      required this.controller});
 
   final String title;
   final String textHint;
+  final TextEditingController controller;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -26,7 +30,7 @@ class TextFieldCustomAll extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          TextFieldCustom(hintTxt: textHint)
+          TextFieldCustom(controller: controller, hintTxt: textHint)
         ],
       ),
     );

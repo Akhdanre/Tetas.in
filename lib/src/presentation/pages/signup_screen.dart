@@ -28,27 +28,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Align(
                       alignment: Alignment.topLeft,
                       child: Regards(screen: screen)),
-                  const TextFieldCustomAll(
+                   TextFieldCustomAll(
+                    controller: ,
                     title: "Username",
                     textHint: "kukuruyuk",
                   ),
-                  const TextFieldCustomAll(
+                   TextFieldCustomAll(
                     title: "Name",
                     textHint: "ayam",
                   ),
-                  const TextFieldCustomAll(
+                   TextFieldCustomAll(
                     title: "Password",
                     textHint: "",
                   ),
-                  const TextFieldCustomAll(
+                   TextFieldCustomAll(
                     title: "Confirm Password",
                     textHint: "",
                   ),
-                  const TextFieldCustomAll(
+                   TextFieldCustomAll(
                     title: "ID Inkubator",
                     textHint: "IND0001",
                   ),
-                  const TextFieldCustomAll(
+                   TextFieldCustomAll(
                     title: "Token",
                     textHint: "kwdtghtk",
                   ),

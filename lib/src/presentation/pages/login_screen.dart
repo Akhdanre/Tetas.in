@@ -16,6 +16,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController username = TextEditingController();
+  TextEditingController password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     SizeConfig screen = SizeConfig(context);
@@ -29,28 +32,28 @@ class _LoginScreenState extends State<LoginScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Regards(screen: screen),
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     "Username",
                     style: TextStyle(fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  TextFieldCustom(hintTxt: "Kukuruyuk"),
-                  SizedBox(
+                  TextFieldCustom(controller: username, hintTxt: "Kukuruyuk"),
+                  const SizedBox(
                     height: 15,
                   ),
-                  Text(
+                  const Text(
                     "password",
                     style: TextStyle(fontWeight: FontWeight.w500),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
-                  TextFieldCustom(hintTxt: "password"),
+                  TextFieldCustom(controller: password, hintTxt: "password"),
                 ],
               ),
               const SizedBox(
