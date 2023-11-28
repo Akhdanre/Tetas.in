@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tetas_in/src/view/pages/controller_screen.dart';
-import 'package:tetas_in/src/view/pages/evolution_screen.dart';
-import 'package:tetas_in/src/view/pages/history_screen.dart';
-import 'package:tetas_in/src/view/pages/home_screen.dart';
+import 'package:tetas_in/src/presentation/pages/controller_screen.dart';
+import 'package:tetas_in/src/presentation/pages/evolution_screen.dart';
+import 'package:tetas_in/src/presentation/pages/history_screen.dart';
+import 'package:tetas_in/src/presentation/pages/home_screen.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});

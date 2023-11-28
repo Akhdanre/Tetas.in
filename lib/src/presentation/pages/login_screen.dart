@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
-import 'package:tetas_in/src/view/pages/base_screen.dart';
-import 'package:tetas_in/src/view/pages/signup_screen.dart';
-import 'package:tetas_in/src/view/widgets/background.dart';
-import 'package:tetas_in/src/view/widgets/forgot_pass_widget.dart';
-import 'package:tetas_in/src/view/widgets/regard_widget.dart';
-import 'package:tetas_in/src/view/widgets/text_form_field_custom.dart';
+import 'package:tetas_in/src/presentation/pages/base_screen.dart';
+import 'package:tetas_in/src/presentation/pages/signup_screen.dart';
+import 'package:tetas_in/src/presentation/widgets/background.dart';
+import 'package:tetas_in/src/presentation/widgets/forgot_pass_widget.dart';
+import 'package:tetas_in/src/presentation/widgets/regard_widget.dart';
+import 'package:tetas_in/src/presentation/widgets/text_form_field_custom.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

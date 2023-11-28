@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
-import 'package:tetas_in/src/view/widgets/background.dart';
+import 'package:tetas_in/src/presentation/widgets/background.dart';
 
 class ControllerScreen extends StatefulWidget {
   const ControllerScreen({super.key});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tetas_in/src/view/pages/splash_screen.dart';
+import 'package:tetas_in/src/presentation/pages/splash_screen.dart';
 
 void main() {
   runApp(const App());

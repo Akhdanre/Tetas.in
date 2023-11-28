@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
-import 'package:tetas_in/src/view/widgets/background.dart';
-import 'package:tetas_in/src/view/widgets/status_info_inku_widget.dart';
+import 'package:tetas_in/src/presentation/widgets/background.dart';
+import 'package:tetas_in/src/presentation/widgets/status_info_inku_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
-import 'package:tetas_in/src/view/widgets/background.dart';
-import 'package:tetas_in/src/view/widgets/regard_widget.dart';
-import 'package:tetas_in/src/view/widgets/text_field_custom_all.dart';
+import 'package:tetas_in/src/presentation/widgets/background.dart';
+import 'package:tetas_in/src/presentation/widgets/regard_widget.dart';
+import 'package:tetas_in/src/presentation/widgets/text_field_custom_all.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});

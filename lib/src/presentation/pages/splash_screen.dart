@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tetas_in/src/bussines_logic/cubit/login_cubit.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
-import 'package:tetas_in/src/view/pages/login_screen.dart';
-import 'package:tetas_in/src/view/widgets/background.dart';
+import 'package:tetas_in/src/presentation/pages/login_screen.dart';
+import 'package:tetas_in/src/presentation/widgets/background.dart';
 
 class SplashScreenPage extends StatelessWidget {
   const SplashScreenPage({super.key});
