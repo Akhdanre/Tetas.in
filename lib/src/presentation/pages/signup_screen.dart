@@ -13,6 +13,12 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  TextEditingController username = TextEditingController();
+  TextEditingController name = TextEditingController();
+  TextEditingController password = TextEditingController();
+  TextEditingController passwordconfirm = TextEditingController();
+  TextEditingController inkubatorId = TextEditingController();
+  TextEditingController token = TextEditingController();
   @override
   Widget build(BuildContext context) {
     SizeConfig screen = SizeConfig(context);
@@ -28,28 +34,33 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Align(
                       alignment: Alignment.topLeft,
                       child: Regards(screen: screen)),
-                   TextFieldCustomAll(
-                    controller: ,
+                  TextFieldCustomAll(
+                    controller: username,
                     title: "Username",
                     textHint: "kukuruyuk",
                   ),
-                   TextFieldCustomAll(
+                  TextFieldCustomAll(
+                    controller: name,
                     title: "Name",
                     textHint: "ayam",
                   ),
-                   TextFieldCustomAll(
+                  TextFieldCustomAll(
+                    controller: password,
                     title: "Password",
                     textHint: "",
                   ),
-                   TextFieldCustomAll(
+                  TextFieldCustomAll(
+                    controller: passwordconfirm,
                     title: "Confirm Password",
                     textHint: "",
                   ),
-                   TextFieldCustomAll(
+                  TextFieldCustomAll(
+                    controller: inkubatorId,
                     title: "ID Inkubator",
                     textHint: "IND0001",
                   ),
-                   TextFieldCustomAll(
+                  TextFieldCustomAll(
+                    controller: token,
                     title: "Token",
                     textHint: "kwdtghtk",
                   ),
