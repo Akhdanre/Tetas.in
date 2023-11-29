@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/pages/base_screen.dart';
-import 'package:tetas_in/src/presentation/pages/signup_screen.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
 import 'package:tetas_in/src/presentation/widgets/forgot_pass_widget.dart';
 import 'package:tetas_in/src/presentation/widgets/regard_widget.dart';
@@ -88,13 +87,9 @@ class _LoginScreenState extends State<LoginScreen> {
                     children: [
                       const Text("Don't have an account? "),
                       GestureDetector(
-                        onTap: () {
-                          Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const SignUpScreen(),
-                              ));
-                        },
+                        // onTap: () => context
+                        //     .read<LoginCubit>()
+                        //     .login(username.text, password.text),
                         child: const Text(
                           "Sign Up",
                           style: TextStyle(color: blueString),
