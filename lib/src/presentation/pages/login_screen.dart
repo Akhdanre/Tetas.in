@@ -20,12 +20,11 @@ class _LoginScreenState extends State<LoginScreen> {
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
 
-  void _navigateToHome() {
+  void _navigateToMenuPage() {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (context) =>
-            const BaseScreen(), // Gantilah dengan halaman sign-up yang sesuai
+        builder: (context) => const BaseScreen(),
       ),
     );
   }
@@ -37,37 +36,43 @@ class _LoginScreenState extends State<LoginScreen> {
       body: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is AuthLoading) {
-            // Menampilkan floating loading dialog notification
             showDialog(
               context: context,
               barrierDismissible: false,
               builder: (BuildContext context) {
-                return const AlertDialog(
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      CircularProgressIndicator(),
-                      SizedBox(height: 10),
-                      Text("Logging in..."),
-                    ],
+                return WillPopScope(
+                  onWillPop: () async => false,
+                  child: const AlertDialog(
+                    backgroundColor: Colors.transparent,
+                    elevation: 0.0,
+                    content: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircularProgressIndicator(),
+                        SizedBox(height: 10.0),
+                        Text(
+                          "Logging in...",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               },
             );
           } else if (state is AuthError) {
-            // Menampilkan pesan kesalahan
-            Navigator.pop(context); // Tutup loading dialog
+            Navigator.pop(context);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),
-                backgroundColor: Colors.red,
+                backgroundColor: Colors.red[500],
               ),
             );
           } else if (state is AuthSuccess) {
             // Tutup loading dialog
             Navigator.pop(context);
             // Navigasi ke halaman beranda setelah login berhasil
-            _navigateToHome();
+            _navigateToMenuPage();
           }
         },
         child: Background(

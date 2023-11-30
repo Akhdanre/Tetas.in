@@ -10,7 +10,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(AuthLoading());
       Future.delayed(Duration(seconds: 2));
-      //memulai login
+      // memulai login
       if (username == "ipul" && password == "none") {
         emit(AuthSuccess(token: "lkjelk-kh23kns-kn3k"));
       } else {
