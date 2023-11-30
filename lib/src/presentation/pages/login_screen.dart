@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tetas_in/src/bussines_logic/cubit/cubit/auth_cubit.dart';
+import 'package:tetas_in/src/bussines_logic/cubit/auth_cubit.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/pages/base_screen.dart';
@@ -36,39 +36,39 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
-          // if (state is AuthLoading) {
-          //   // Menampilkan floating loading dialog notification
-          //   showDialog(
-          //     context: context,
-          //     barrierDismissible: false,
-          //     builder: (BuildContext context) {
-          //       return const AlertDialog(
-          //         content: Column(
-          //           mainAxisSize: MainAxisSize.min,
-          //           children: [
-          //             CircularProgressIndicator(),
-          //             SizedBox(height: 10),
-          //             Text("Logging in..."),
-          //           ],
-          //         ),
-          //       );
-          //     },
-          //   );
-          // } else if (state is AuthError) {
-          //   // Menampilkan pesan kesalahan
-          //   Navigator.pop(context); // Tutup loading dialog
-          //   ScaffoldMessenger.of(context).showSnackBar(
-          //     SnackBar(
-          //       content: Text(state.errorMessage),
-          //       backgroundColor: Colors.red,
-          //     ),
-          //   );
-          // } else if (state is AuthAuthenticated) {
-          //   // Tutup loading dialog
-          //   Navigator.pop(context);
-          //   // Navigasi ke halaman beranda setelah login berhasil
-          //   _navigateToHome();
-          // }
+          if (state is AuthLoading) {
+            // Menampilkan floating loading dialog notification
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return const AlertDialog(
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 10),
+                      Text("Logging in..."),
+                    ],
+                  ),
+                );
+              },
+            );
+          } else if (state is AuthError) {
+            // Menampilkan pesan kesalahan
+            Navigator.pop(context); // Tutup loading dialog
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
+              ),
+            );
+          } else if (state is AuthSuccess) {
+            // Tutup loading dialog
+            Navigator.pop(context);
+            // Navigasi ke halaman beranda setelah login berhasil
+            _navigateToHome();
+          }
         },
         child: Background(
           screen: screen,
@@ -112,9 +112,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        // context.read<AuthBloc>().add(
-                        //       LoginEvent(username.text, password.text),
-                        //     );
+                        context
+                            .read<AuthCubit>()
+                            .login(username.text, password.text);
                       },
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),

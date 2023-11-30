@@ -13,8 +13,8 @@ final class AuthSuccess extends AuthState {
   AuthSuccess({required this.token});
 }
 
-final class AuthException extends AuthState {
+final class AuthError extends AuthState {
   final String message;
 
-  AuthException({required this.message});
+  AuthError({required this.message});
 }
