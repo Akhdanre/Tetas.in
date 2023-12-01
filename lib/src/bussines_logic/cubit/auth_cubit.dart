@@ -19,7 +19,6 @@ class AuthCubit extends Cubit<AuthState> {
       final data = await loginRequest(
           LoginRequest(username: username, password: password));
       var json = jsonDecode(data);
-      print(json);
       BaseModel tokendata = BaseModel.fromJson(json);
       if (tokendata.data.token.isNotEmpty) {
         UserData().setToken(tokendata.data.token);
@@ -38,7 +37,6 @@ class AuthCubit extends Cubit<AuthState> {
     final jsonData = jsonEncode(user.toJson());
     var response = await http.post(url,
         body: jsonData, headers: {"Content-Type": 'application/json'});
-    print(response.statusCode);
     return response.body;
   }
 }
