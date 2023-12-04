@@ -78,17 +78,18 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                       ControllerState>(
                                     builder: (context, state) {
                                       return Slider(
-                                          value: state is ControllerUpdate
-                                              ? state.tempSliderValue
-                                              : (state as ControllerInitial)
-                                                  .tempSliderValue,
-                                          max: 50,
-                                          min: 25,
-                                          onChanged: (value) {
-                                            setState(() {
-                                              tempLimit = value;
-                                            });
-                                          });
+                                        value: state is ControllerTempUpdate
+                                            ? state.tempSliderValue.toDouble()
+                                            : (state as ControllerInitial)
+                                                .tempDefaultValue
+                                                .toDouble(),
+                                        max: 50,
+                                        min: 25,
+                                        onChanged: (value) {
+                                          // Dispatch an event to the bloc to update the slider value
+                                          // context.read<ControllerBloc>().add(UpdateSliderValue(value.toInt()));
+                                        },
+                                      );
                                     },
                                   )),
                             ],
@@ -133,16 +134,15 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                       ControllerState>(
                                     builder: (context, state) {
                                       return Slider(
-                                          value: state is ControllerUpdate
-                                              ? state.humdSliderValue
+                                          value: state is ControllerHumdUpdate
+                                              ? state.humdSliderValue.toDouble()
                                               : (state as ControllerInitial)
-                                                  .humdSliderValue,
+                                                  .humdDefaultValue
+                                                  .toDouble(),
                                           max: 100,
                                           min: 0,
                                           onChanged: (value) {
-                                            setState(() {
-                                              humdLimit = value;
-                                            });
+                                           
                                           });
                                     },
                                   )),
