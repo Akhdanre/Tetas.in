@@ -24,17 +24,27 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   void onWsListen() {
-    _webSocketChannel.stream.listen((message) {
-      Map<String, dynamic> data = json.decode(message);
-      if (data['sender'] == 'inku' &&
-          data['action'] == 'post' &&
-          data['request'] == 'send_data') {
-        int temp = data['data']['temp'];
-        int humd = data['data']['humd'];
-        int water = data['data']['water'];
-        add(UpdateDataRequest(temp: temp, humd: humd, water: water));
-      }
-    });
+    _webSocketChannel.stream.listen(
+      (message) {
+        Map<String, dynamic> data = json.decode(message);
+        if (data['sender'] == 'inku' &&
+            data['action'] == 'post' &&
+            data['request'] == 'send_data') {
+          int temp = data['data']['temp'];
+          int humd = data['data']['humd'];
+          int water = data['data']['water'];
+          add(UpdateDataRequest(temp: temp, humd: humd, water: water));
+        }
+      },
+      onError: (error) {
+        print('WebSocket error: $error');
+
+        _webSocketChannel.sink.close();
+
+        _webSocketChannel =
+            IOWebSocketChannel.connect('ws://10.10.10.251:8000/ws/control');
+      },
+    );
   }
 
   @override
