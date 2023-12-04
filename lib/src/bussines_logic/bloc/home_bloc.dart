@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 import 'package:web_socket_channel/io.dart';
@@ -15,6 +14,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     _webSocketChannel =
         IOWebSocketChannel.connect('ws://10.10.10.251:8000/ws/control');
     onWsListen();
+
+    on<UpdateDataRequest>(
+      (event, emit) {
+        emit(HomeUpdate(
+            temp: event.temp, humd: event.humd, waterVolume: event.water));
+      },
+    );
   }
 
   void onWsListen() {
@@ -23,19 +29,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       if (data['sender'] == 'inku' &&
           data['action'] == 'post' &&
           data['request'] == 'send_data') {
-        double temp = data['data']['temp'];
-        double humd = data['data']['humd'];
-        double water = data['data']['water'];
+        int temp = data['data']['temp'];
+        int humd = data['data']['humd'];
+        int water = data['data']['water'];
+        add(UpdateDataRequest(temp: temp, humd: humd, water: water));
       }
     });
   }
-
-  void UpdateInfoInkuValue(int temp, int humd, int water) =>
-      on<UpdateDataRequest>(
-        (event, emit) {
-          emit(HomeUpdate(temp: temp, humd: humd, waterVolume: water));
-        },
-      );
 
   @override
   Future<void> close() {

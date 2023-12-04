@@ -8,7 +8,7 @@ class StatusInfoInku extends StatelessWidget {
     required this.title,
   });
 
-  final double value;
+  final int value;
   final String title;
 
   @override
