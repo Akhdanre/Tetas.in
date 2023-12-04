@@ -13,7 +13,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc() : super(HomeInitial()) {
     _webSocketChannel =
-        IOWebSocketChannel.connect('ws://10.10.10.25:8000/ws/control');
+        IOWebSocketChannel.connect('ws://10.10.10.251:8000/ws/control');
     onWsListen();
   }
 
@@ -26,14 +26,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         double temp = data['data']['temp'];
         double humd = data['data']['humd'];
         double water = data['data']['water'];
-        on<UpdateDataRequest>(
-          (event, emit) {
-            emit(HomeUpdate(temp: temp, humd: humd, waterVolume: water));
-          },
-        );
       }
     });
   }
+
+  void UpdateInfoInkuValue(int temp, int humd, int water) =>
+      on<UpdateDataRequest>(
+        (event, emit) {
+          emit(HomeUpdate(temp: temp, humd: humd, waterVolume: water));
+        },
+      );
 
   @override
   Future<void> close() {
