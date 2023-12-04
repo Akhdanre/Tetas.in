@@ -24,7 +24,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
         child: Background(
           screen: screen,
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -103,7 +103,6 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                   height: 20,
                 ),
                 Container(
-                  height: 150,
                   decoration: BoxDecoration(
                       boxShadow: [
                         BoxShadow(

@@ -25,15 +25,16 @@ class _ControllerScreenState extends State<ControllerScreen> {
               screen: screen,
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 25),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    const Align(
+                    const Padding(
+                      padding: EdgeInsets.only(top: 20, bottom: 10),
                       child: Text(
                         "Controller",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 30, fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(
