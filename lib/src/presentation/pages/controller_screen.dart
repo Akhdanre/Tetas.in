@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tetas_in/src/bussines_logic/bloc/controller_bloc.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
@@ -72,15 +74,23 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                           pressedElevation: 0,
                                           elevation: 0,
                                           enabledThumbRadius: 10.0)),
-                                  child: Slider(
-                                      value: tempLimit,
-                                      max: 50,
-                                      min: 25,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          tempLimit = value;
-                                        });
-                                      })),
+                                  child: BlocBuilder<ControllerBloc,
+                                      ControllerState>(
+                                    builder: (context, state) {
+                                      return Slider(
+                                          value: state is ControllerUpdate
+                                              ? state.tempSliderValue
+                                              : (state as ControllerInitial)
+                                                  .tempSliderValue,
+                                          max: 50,
+                                          min: 25,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              tempLimit = value;
+                                            });
+                                          });
+                                    },
+                                  )),
                             ],
                           ),
                         )),
@@ -119,15 +129,23 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                           pressedElevation: 0,
                                           elevation: 0,
                                           enabledThumbRadius: 10.0)),
-                                  child: Slider(
-                                      value: humdLimit,
-                                      max: 100,
-                                      min: 0,
-                                      onChanged: (value) {
-                                        setState(() {
-                                          humdLimit = value;
-                                        });
-                                      })),
+                                  child: BlocBuilder<ControllerBloc,
+                                      ControllerState>(
+                                    builder: (context, state) {
+                                      return Slider(
+                                          value: state is ControllerUpdate
+                                              ? state.humdSliderValue
+                                              : (state as ControllerInitial)
+                                                  .humdSliderValue,
+                                          max: 100,
+                                          min: 0,
+                                          onChanged: (value) {
+                                            setState(() {
+                                              humdLimit = value;
+                                            });
+                                          });
+                                    },
+                                  )),
                             ],
                           ),
                         )),
