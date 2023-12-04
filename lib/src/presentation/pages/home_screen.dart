@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tetas_in/src/bussines_logic/bloc/home_bloc.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
@@ -117,17 +119,50 @@ class _HomeScreenState extends State<HomeScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      StatusInfoInku(
-                        value: temp,
-                        title: 'Temperature',
+                      BlocBuilder<HomeBloc, HomeState>(
+                        builder: (context, state) {
+                          if (state is HomeUpdate) {
+                            return StatusInfoInku(
+                              value: state.temp,
+                              title: 'Temperature',
+                            );
+                          }
+                          return StatusInfoInku(
+                            value: (state as HomeInitial)
+                                .defaultValue, // Assuming temp is the temperature property in HomeInitial
+                            title: 'Temperature',
+                          );
+                        },
                       ),
-                      StatusInfoInku(
-                        value: humd,
-                        title: 'Humidty',
+                      BlocBuilder<HomeBloc, HomeState>(
+                        builder: (context, state) {
+                          if (state is HomeUpdate) {
+                            return StatusInfoInku(
+                              value: state.humd,
+                              title: 'Humidity',
+                            );
+                          }
+                          return StatusInfoInku(
+                            value: (state as HomeInitial)
+                                .defaultValue, // Assuming temp is the temperature property in HomeInitial
+                            title: 'Humidity',
+                          );
+                        },
                       ),
-                      StatusInfoInku(
-                        value: water,
-                        title: 'Water',
+                      BlocBuilder<HomeBloc, HomeState>(
+                        builder: (context, state) {
+                          if (state is HomeUpdate) {
+                            return StatusInfoInku(
+                              value: state.waterVolume,
+                              title: 'Water Volume',
+                            );
+                          }
+                          return StatusInfoInku(
+                            value: (state as HomeInitial)
+                                .defaultValue, // Assuming temp is the temperature property in HomeInitial
+                            title: 'water',
+                          );
+                        },
                       ),
                     ],
                   ),
