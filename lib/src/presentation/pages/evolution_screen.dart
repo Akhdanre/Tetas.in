@@ -28,13 +28,15 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Align(
-                    child: Text(
-                  "Evolution",
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                )),
+                const Padding(
+                  padding: EdgeInsets.only(top: 20, bottom: 10),
+                  child: Text(
+                    "Egg Evolution",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                ),
                 SizedBox(
-                  height: 80,
+                  height: 60,
                   width: screen.widht,
                   child: ListView.builder(
                     shrinkWrap: true,
