@@ -120,6 +120,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         context
                             .read<AuthCubit>()
                             .login(username.text, password.text);
+                            
                       },
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),

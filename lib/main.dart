@@ -15,6 +15,7 @@ class App extends StatelessWidget {
       title: "Tetas.In",
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
+      locale: const Locale('id'),
       theme:
           ThemeData(primaryColor: Colors.white, brightness: Brightness.light),
       home: const SplashScreenPage(),

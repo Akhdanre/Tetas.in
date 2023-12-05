@@ -16,7 +16,9 @@ class Regards extends StatelessWidget {
           height: screen.vertical2,
         ),
         Text(AppLocalizations.of(context).greating,
-            style: const TextStyle(fontSize: 45, fontWeight: FontWeight.w900)),
+            style: AppLocalizations.of(context).localeName == 'id'
+                ? const TextStyle(fontSize: 35, fontWeight: FontWeight.w900)
+                : const TextStyle(fontSize: 45, fontWeight: FontWeight.w900)),
         Text(
           AppLocalizations.of(context).account_message,
           style: const TextStyle(fontWeight: FontWeight.w300),
