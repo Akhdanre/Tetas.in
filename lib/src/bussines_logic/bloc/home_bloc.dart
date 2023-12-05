@@ -37,8 +37,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         }
       },
       onError: (error) {
-        print('WebSocket error: $error');
-
         _webSocketChannel.sink.close();
 
         _webSocketChannel =
