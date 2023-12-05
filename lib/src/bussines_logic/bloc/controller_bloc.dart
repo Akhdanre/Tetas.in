@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:web_socket_channel/io.dart';
@@ -9,25 +10,40 @@ part 'controller_state.dart';
 
 class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
   late WebSocketChannel _webSocketChannel;
-  late Timer _timer;
-  late int _tempValue;
-  late int _humdValue;
+  Timer? _timer;
+  int _tempValue = 39;
+  int _humdValue = 70;
   Duration duration = const Duration(seconds: 3);
 
   ControllerBloc() : super(ControllerInitial()) {
     _webSocketChannel =
         IOWebSocketChannel.connect('ws://10.10.10.251:8000/ws/control');
-    _timer = Timer.periodic(duration, _sendDataIfInactive);
-    on<UpdateLimit>((event, emit) {
+
+    on<UpdateTempLimit>((event, emit) {
       _tempValue = event.temp;
+      emit(ControllerTempUpdate(tempSliderValue: event.temp));
+      if (_timer != null) {
+        _timer!.cancel();
+      }
+      _timer = Timer.periodic(duration, _sendDataIfInactive);
+    });
+
+    on<UpdateHumdLimit>((event, emit) {
       _humdValue = event.humd;
-      _timer.cancel(); // Reset the timer when the slider is updated
+      emit(ControllerHumdUpdate(humdSliderValue: event.humd));
+      if (_timer != null) {
+        _timer!.cancel();
+      }
       _timer = Timer.periodic(duration, _sendDataIfInactive);
     });
   }
 
-  void addLimitValue(int temp, int humd) {
-    add(UpdateLimit(temp: temp, humd: humd));
+  void addTempLimitValue(int tempLimit) {
+    add(UpdateTempLimit(temp: tempLimit));
+  }
+
+  void addHumdLimitValue(int humdLimit) {
+    add(UpdateHumdLimit(humd: humdLimit));
   }
 
   void _sendDataIfInactive(Timer timer) {
@@ -37,12 +53,15 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
       "condition": "update_limit",
       "data": {"temp": _tempValue, "humd": _humdValue}
     };
-    _webSocketChannel.sink.add(json);
+
+    var jsonString = jsonEncode(json); // Convert the Dart map to a JSON string
+    _webSocketChannel.sink
+        .add(jsonString); // Send the JSON string through the WebSocket channel
   }
 
   @override
   Future<void> close() {
-    _timer.cancel(); // Cancel the timer when the bloc is closed
+    _timer?.cancel(); // Cancel the timer when the bloc is closed
     _webSocketChannel.sink.close();
     return super.close();
   }

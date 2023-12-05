@@ -77,19 +77,34 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                   child: BlocBuilder<ControllerBloc,
                                       ControllerState>(
                                     builder: (context, state) {
-                                      return Slider(
-                                        value: state is ControllerTempUpdate
-                                            ? state.tempSliderValue.toDouble()
-                                            : (state as ControllerInitial)
-                                                .tempDefaultValue
-                                                .toDouble(),
-                                        max: 50,
-                                        min: 25,
-                                        onChanged: (value) {
-                                          // Dispatch an event to the bloc to update the slider value
-                                          // context.read<ControllerBloc>().add(UpdateSliderValue(value.toInt()));
-                                        },
-                                      );
+                                      if (state is ControllerTempUpdate) {
+                                        return Slider(
+                                          value:
+                                              state.tempSliderValue.toDouble(),
+                                          max: 100,
+                                          min: 0,
+                                          onChanged: (value) {
+                                            context.read<ControllerBloc>().add(
+                                                UpdateTempLimit(
+                                                    temp: value.toInt()));
+                                          },
+                                        );
+                                      } else if (state is ControllerInitial) {
+                                        return Slider(
+                                          value:
+                                              state.humdDefaultValue.toDouble(),
+                                          max: 100,
+                                          min: 0,
+                                          onChanged: (value) {
+                                            context.read<ControllerBloc>().add(
+                                                UpdateTempLimit(
+                                                    temp: value.toInt()));
+                                          },
+                                        );
+                                      } else {
+                                        // Handle other states if needed
+                                        return Container();
+                                      }
                                     },
                                   )),
                             ],
@@ -133,17 +148,31 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                   child: BlocBuilder<ControllerBloc,
                                       ControllerState>(
                                     builder: (context, state) {
-                                      return Slider(
-                                          value: state is ControllerHumdUpdate
-                                              ? state.humdSliderValue.toDouble()
-                                              : (state as ControllerInitial)
-                                                  .humdDefaultValue
-                                                  .toDouble(),
+                                      if (state is ControllerHumdUpdate) {
+                                        return Slider(
+                                          value:
+                                              state.humdSliderValue.toDouble(),
                                           max: 100,
                                           min: 0,
                                           onChanged: (value) {
-                                           
-                                          });
+                                            context.read<ControllerBloc>().add(
+                                                UpdateHumdLimit(
+                                                    humd: value.toInt()));
+                                          },
+                                        );
+                                      }
+                                      return Slider(
+                                        value: (state as ControllerInitial)
+                                            .humdDefaultValue
+                                            .toDouble(),
+                                        max: 100,
+                                        min: 0,
+                                        onChanged: (value) {
+                                          context.read<ControllerBloc>().add(
+                                              UpdateHumdLimit(
+                                                  humd: value.toInt()));
+                                        },
+                                      );
                                     },
                                   )),
                             ],
