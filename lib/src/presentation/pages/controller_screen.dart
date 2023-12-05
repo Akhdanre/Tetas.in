@@ -87,8 +87,8 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                       }
                                       return Slider(
                                         value: tempLimit,
-                                        max: 100,
-                                        min: 0,
+                                        max: 40,
+                                        min: 35,
                                         onChanged: (value) {
                                           context.read<ControllerBloc>().add(
                                               UpdateTempLimit(
@@ -148,8 +148,8 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                     }
                                     return Slider(
                                       value: humdLimit,
-                                      max: 100,
-                                      min: 0,
+                                      max: 70,
+                                      min: 50,
                                       onChanged: (value) {
                                         context.read<ControllerBloc>().add(
                                             UpdateHumdLimit(
