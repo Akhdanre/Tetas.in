@@ -1,18 +1,10 @@
 {
-  "@tempIn": {
-    "description": "Label for temperature",
-    "placeholders": {
-      "value": {
-        "description": "temperature is stable",
-        "example": "38"
-      },
-      "value1": {
-        "description": "temperature a bit hot",
-        "example": "39"
-      }
-    }
-  },
   "account_message": "Please enter your account",
   "greating": "HI!\nWELCOME",
-  "tempIn": "Temperature In"
+  "temp_in_35": "35 degrees is too cold for hatch an eggs",
+  "temp_in_36": "36 degrees is too cold for hatch an eggs",
+  "temp_in_37": "37 degrees is kinda cold, less suiteble for hatch an eggs",
+  "temp_in_38": "38 degrees is stable, suitable for hatch an eggs",
+  "temp_in_39": "39 degrees is kinda hot, less suitable for hatch an eggs",
+  "temp_in_40": "40 degrees is too hot, less suitable for hatch an eggs"
 }

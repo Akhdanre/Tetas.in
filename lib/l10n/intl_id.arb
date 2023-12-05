@@ -1,18 +1,10 @@
 {
-  "@tempIn": {
-    "description": "Label for temperature",
-    "placeholders": {
-      "value": {
-        "description": "suhu stabil",
-        "example": "38"
-      },
-      "value1": {
-        "description": "suhu agak panas",
-        "example": "39"
-      }
-    }
-  },
   "account_message": "Tolong masukkan akunmu",
   "greating": "HI!\nSELAMAT DATANG",
-  "tempIn": "Temperature In"
+  "temp_in_35": "Suhu 35 derajat celcius terlalu dingin untuk menetaskan telur",
+  "temp_in_36": "Suhu 36 derajat celcius terlalu dingin untuk menetaskan telur",
+  "temp_in_37": "Suhu 37 derajat celcius agak dingin, kurang sesuai untuk menetaskan telur",
+  "temp_in_38": "Suhu 38 derajat celcius agak dingin, sesuai untuk menetaskan telur",
+  "temp_in_39": "Suhu 39 derajat celcius agak panas, kurang sesuai untuk menetaskan telur",
+  "temp_in_40": "Suhu 40 derajat celcius terlalu panas, kurang sesuai untuk menetaskan telur"
 }
