@@ -255,46 +255,49 @@ class _ControllerScreenState extends State<ControllerScreen> {
                             ),
                             BlocBuilder<ControllerBloc, ControllerState>(
                               builder: (context, state) {
-                                String text = '';
-
                                 if (state is ControllerInitial) {
-                                  text =
-                                      AppLocalizations.of(context).temp_in_38;
+                                  description2 =
+                                      AppLocalizations.of(context).humd_in_58;
                                 }
 
-                                if (state is ControllerTempUpdate) {
-                                  int condition = state.tempSliderValue;
-
+                                if (state is ControllerHumdUpdate) {
+                                  int condition = state.humdSliderValue;
                                   switch (condition) {
-                                    case 35:
-                                      text = AppLocalizations.of(context)
-                                          .temp_in_35;
+                                    case 55:
+                                      description2 =
+                                          AppLocalizations.of(context)
+                                              .humd_in_55;
                                       break;
-                                    case 36:
-                                      text = AppLocalizations.of(context)
-                                          .temp_in_36;
+                                    case 56:
+                                      description2 =
+                                          AppLocalizations.of(context)
+                                              .humd_in_56;
                                       break;
-                                    case 37:
-                                      text = AppLocalizations.of(context)
-                                          .temp_in_37;
+                                    case 57:
+                                      description2 =
+                                          AppLocalizations.of(context)
+                                              .humd_in_57;
                                       break;
-                                    case 38:
-                                      text = AppLocalizations.of(context)
-                                          .temp_in_38;
+                                    case 58:
+                                      description2 =
+                                          AppLocalizations.of(context)
+                                              .humd_in_58;
                                       break;
-                                    case 39:
-                                      text = AppLocalizations.of(context)
-                                          .temp_in_39;
+                                    case 59:
+                                      description2 =
+                                          AppLocalizations.of(context)
+                                              .humd_in_59;
                                       break;
-                                    case 40:
-                                      text = AppLocalizations.of(context)
-                                          .temp_in_40;
+                                    case 60:
+                                      description2 =
+                                          AppLocalizations.of(context)
+                                              .humd_in_60;
                                       break;
                                   }
                                 }
 
                                 return Text(
-                                  text,
+                                  description2,
                                   textAlign: TextAlign.justify,
                                 );
                               },

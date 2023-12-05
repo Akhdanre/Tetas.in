@@ -1,6 +1,12 @@
 {
   "account_message": "Please enter your account",
   "greating": "HI!\nWELCOME",
+  "humd_in_55": "55 percent humidity, environtment lack of moisture for optimal egg hatch",
+  "humd_in_56": "With an increase to 56 percent humidity, conditions improve, enhancing the chances of embryo survival and development.",
+  "humd_in_57": "With an increase to 57 percent humidity, conditions improve, enhancing the chances of embryo survival and development.",
+  "humd_in_58": "Humidity at 58 percent approaches ideal conditions, creating a comfortable environment for egg incubation.",
+  "humd_in_59": "Humidity at 59 percent approaches ideal conditions, creating a comfortable environment for egg incubation.",
+  "humd_in_60": "At 60 percent humidity, the environment reaches optimal humidity for ensuring successful egg incubation and healthy embryo development.",
   "temp_in_35": "35 degrees is too cold for hatch an eggs",
   "temp_in_36": "36 degrees is too cold for hatch an eggs",
   "temp_in_37": "37 degrees is kinda cold, less suiteble for hatch an eggs",
