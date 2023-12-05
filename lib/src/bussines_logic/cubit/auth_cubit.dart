@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
@@ -27,6 +28,7 @@ class AuthCubit extends Cubit<AuthState> {
         emit(AuthError(message: "Invalid credentials"));
       }
     } catch (e) {
+      log("error : $e");
       emit(AuthError(message: "An error occurred during login."));
     }
   }
@@ -41,7 +43,6 @@ class AuthCubit extends Cubit<AuthState> {
         body: jsonData,
         headers: {"Content-Type": 'application/json'},
       );
-
 
       if (response.statusCode == 200) {
         return response.body;

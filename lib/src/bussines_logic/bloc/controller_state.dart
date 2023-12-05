@@ -6,7 +6,7 @@ final class ControllerInitial extends ControllerState {
   int tempDefaultValue;
   int humdDefaultValue;
 
-  ControllerInitial({this.tempDefaultValue = 38, this.humdDefaultValue = 70});
+  ControllerInitial({this.tempDefaultValue = 38, this.humdDefaultValue = 58});
 }
 
 final class ControllerTempUpdate extends ControllerState {

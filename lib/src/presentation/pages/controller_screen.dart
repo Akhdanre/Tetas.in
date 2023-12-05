@@ -4,6 +4,7 @@ import 'package:tetas_in/src/bussines_logic/bloc/controller_bloc.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ControllerScreen extends StatefulWidget {
   const ControllerScreen({super.key});
@@ -15,8 +16,8 @@ class ControllerScreen extends StatefulWidget {
 class _ControllerScreenState extends State<ControllerScreen> {
   double tempLimit = 30.0;
   double humdLimit = 40.0;
-  String description =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus facilisis non mauris id sodales. Maecenas id tincidunt ligula. Fusce leo dui, accumsan at leo sit amet, lobortis interdum felis.v";
+  String description1 = "";
+  String description2 = "";
 
   @override
   Widget build(BuildContext context) {
@@ -148,8 +149,8 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                     }
                                     return Slider(
                                       value: humdLimit,
-                                      max: 70,
-                                      min: 50,
+                                      max: 60,
+                                      min: 55,
                                       onChanged: (value) {
                                         context.read<ControllerBloc>().add(
                                             UpdateHumdLimit(
@@ -189,9 +190,114 @@ class _ControllerScreenState extends State<ControllerScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-                            Text(
-                              description,
-                              textAlign: TextAlign.justify,
+                            const Text(
+                              "Suhu",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                            BlocBuilder<ControllerBloc, ControllerState>(
+                              builder: (context, state) {
+                                if (state is ControllerInitial) {
+                                  description1 =
+                                      AppLocalizations.of(context).temp_in_38;
+                                }
+
+                                if (state is ControllerTempUpdate) {
+                                  int condition = state.tempSliderValue;
+
+                                  switch (condition) {
+                                    case 35:
+                                      description1 =
+                                          AppLocalizations.of(context)
+                                              .temp_in_35;
+                                      break;
+                                    case 36:
+                                      description1 =
+                                          AppLocalizations.of(context)
+                                              .temp_in_36;
+                                      break;
+                                    case 37:
+                                      description1 =
+                                          AppLocalizations.of(context)
+                                              .temp_in_37;
+                                      break;
+                                    case 38:
+                                      description1 =
+                                          AppLocalizations.of(context)
+                                              .temp_in_38;
+                                      break;
+                                    case 39:
+                                      description1 =
+                                          AppLocalizations.of(context)
+                                              .temp_in_39;
+                                      break;
+                                    case 40:
+                                      description1 =
+                                          AppLocalizations.of(context)
+                                              .temp_in_40;
+                                      break;
+                                  }
+                                }
+
+                                return Text(
+                                  description1,
+                                  textAlign: TextAlign.justify,
+                                );
+                              },
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            const Text(
+                              "Kelembapan",
+                              style: TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                            BlocBuilder<ControllerBloc, ControllerState>(
+                              builder: (context, state) {
+                                String text = '';
+
+                                if (state is ControllerInitial) {
+                                  text =
+                                      AppLocalizations.of(context).temp_in_38;
+                                }
+
+                                if (state is ControllerTempUpdate) {
+                                  int condition = state.tempSliderValue;
+
+                                  switch (condition) {
+                                    case 35:
+                                      text = AppLocalizations.of(context)
+                                          .temp_in_35;
+                                      break;
+                                    case 36:
+                                      text = AppLocalizations.of(context)
+                                          .temp_in_36;
+                                      break;
+                                    case 37:
+                                      text = AppLocalizations.of(context)
+                                          .temp_in_37;
+                                      break;
+                                    case 38:
+                                      text = AppLocalizations.of(context)
+                                          .temp_in_38;
+                                      break;
+                                    case 39:
+                                      text = AppLocalizations.of(context)
+                                          .temp_in_39;
+                                      break;
+                                    case 40:
+                                      text = AppLocalizations.of(context)
+                                          .temp_in_40;
+                                      break;
+                                  }
+                                }
+
+                                return Text(
+                                  text,
+                                  textAlign: TextAlign.justify,
+                                );
+                              },
                             ),
                           ],
                         ),
