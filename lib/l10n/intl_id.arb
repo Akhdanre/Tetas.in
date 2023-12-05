@@ -1,5 +1,18 @@
 {
-    "greating" : "HI!\nSELAMAT DATANG",
-    "account_message" : "Tolong masukkan akunmu",
-    "infoTemp" : "suhu yang rendah akan berpengaruh di telur"
+  "@tempIn": {
+    "description": "Label for temperature",
+    "placeholders": {
+      "value": {
+        "description": "suhu stabil",
+        "example": "38"
+      },
+      "value1": {
+        "description": "suhu agak panas",
+        "example": "39"
+      }
+    }
+  },
+  "account_message": "Tolong masukkan akunmu",
+  "greating": "HI!\nSELAMAT DATANG",
+  "tempIn": "Temperature In"
 }

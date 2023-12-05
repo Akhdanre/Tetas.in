@@ -1,5 +1,18 @@
 {
-    "greating" : "HI!\nWELCOME",
-    "account_message" : "Please enter your account",
-    "infoTemp" : "temperature lowest will affect to egg"
+  "@tempIn": {
+    "description": "Label for temperature",
+    "placeholders": {
+      "value": {
+        "description": "temperature is stable",
+        "example": "38"
+      },
+      "value1": {
+        "description": "temperature a bit hot",
+        "example": "39"
+      }
+    }
+  },
+  "account_message": "Please enter your account",
+  "greating": "HI!\nWELCOME",
+  "tempIn": "Temperature In"
 }
