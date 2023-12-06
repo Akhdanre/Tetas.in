@@ -47,7 +47,6 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
     _webSocketChannel.stream.listen(
       (dynamic data) {},
       onDone: () {
-        // WebSocket connection closed
         _reconnect();
       },
       onError: (error) {
@@ -59,12 +58,9 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
   }
 
   void _reconnect() {
-    // Delay before attempting to reconnect (optional)
-    Future.delayed(Duration(seconds: 5), () {
-      // Close the existing WebSocket channel if it exists
+    Future.delayed(const Duration(seconds: 5), () {
       _webSocketChannel.sink.close();
 
-      // Attempt to reconnect
       _connect();
     });
   }

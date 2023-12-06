@@ -98,18 +98,25 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20)),
                     child: isFirst
-                        ? Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Align(child: Image.asset("Assets/Telur/1.jpg")),
-                                const Text("START",
-                                    style: TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold))
-                              ],
+                        ? GestureDetector(
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Align(
+                                      child: Image.asset("Assets/Telur/1.jpg")),
+                                  const Text("START",
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold)),
+                                  const SizedBox(
+                                    height: 15,
+                                  )
+                                ],
+                              ),
                             ),
                           )
                         : Padding(
