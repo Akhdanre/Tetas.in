@@ -26,9 +26,22 @@ class _ControllerScreenState extends State<ControllerScreen> {
       body: SafeArea(
           child: BlocListener<ControllerBloc, ControllerState>(
         listener: (context, state) {
-          if (state is ShowScaffold) {
-            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text('Yay! A SnackBar!'),
+          if (state is ShowSnackbarState) {
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              elevation: 0,
+              behavior: SnackBarBehavior.floating,
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
+              ),
+              // margin: EdgeInsets.only(
+              //     bottom: MediaQuery.of(context).size.height - 150,
+              //     right: 20,
+              //     left: 20),
+              margin: EdgeInsets.all(8.0),
+              content: const Padding(
+                padding: EdgeInsets.all(4.0),
+                child: Text('suhu dan kelembapan berhasil di atur!'),
+              ),
             ));
           }
         },

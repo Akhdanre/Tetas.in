@@ -21,6 +21,6 @@ final class ControllerHumdUpdate extends ControllerState {
   ControllerHumdUpdate({required this.humdSliderValue});
 }
 
-final class ShowScaffold extends ControllerState {}
+final class ShowSnackbarState extends ControllerState {}
 
 final class ControllerError extends ControllerState {}

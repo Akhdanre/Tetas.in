@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:web_socket_channel/io.dart';
@@ -14,38 +15,68 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
   int _tempValue = 39;
   int _humdValue = 70;
   Duration duration = const Duration(seconds: 1);
-  int time = 3;
+  int time = 2;
   bool isvalueChange = false;
 
   ControllerBloc() : super(ControllerInitial()) {
-    _webSocketChannel =
-        IOWebSocketChannel.connect('ws://10.10.10.251:8000/ws/control');
-
+    _connect();
     on<UpdateTempLimit>((event, emit) {
       isvalueChange = true;
-      time = 3;
+      time = 2;
       _tempValue = event.temp;
       emit(ControllerTempUpdate(tempSliderValue: event.temp));
-      _startTimer(emit);
+      _startTimer();
     });
 
     on<UpdateHumdLimit>((event, emit) {
       isvalueChange = true;
-      time = 3;
+      time = 2;
       _humdValue = event.humd;
       emit(ControllerHumdUpdate(humdSliderValue: event.humd));
-      _startTimer(emit);
+      _startTimer();
+    });
+
+    on<ShowSnackBarEvent>(
+      (event, emit) => emit(ShowSnackbarState()),
+    );
+  }
+
+  void _connect() {
+    _webSocketChannel =
+        IOWebSocketChannel.connect('ws://10.10.10.251:8000/ws/control');
+    _webSocketChannel.stream.listen(
+      (dynamic data) {},
+      onDone: () {
+        // WebSocket connection closed
+        _reconnect();
+      },
+      onError: (error) {
+        log(error);
+        _reconnect();
+      },
+      cancelOnError: true,
+    );
+  }
+
+  void _reconnect() {
+    // Delay before attempting to reconnect (optional)
+    Future.delayed(Duration(seconds: 5), () {
+      // Close the existing WebSocket channel if it exists
+      _webSocketChannel.sink.close();
+
+      // Attempt to reconnect
+      _connect();
     });
   }
 
-  void _startTimer(Emitter<ControllerState> emit) {
+  void _startTimer() {
     _timer?.cancel();
     _timer = Timer.periodic(duration, (timer) {
       if (time == 0 && isvalueChange) {
         timer.cancel();
         isvalueChange = false;
         _sendToInku();
-        emit(ShowScaffold());
+        add(ShowSnackBarEvent());
       }
       time--;
     });

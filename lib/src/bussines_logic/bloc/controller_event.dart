@@ -13,3 +13,5 @@ final class UpdateHumdLimit extends ControllerEvent {
 
   UpdateHumdLimit({required this.humd});
 }
+
+final class ShowSnackBarEvent extends ControllerEvent {}
