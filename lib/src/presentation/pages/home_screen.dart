@@ -83,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: screen.vertical2,
                   ),
                   Container(
-                    height: 350,
+                    // height: 350,
                     decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(
@@ -97,11 +97,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(20)),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 10),
+                          horizontal: 20, vertical: 20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Align(child: Image.asset("Assets/egg_image_15.png")),
+                          Align(child: Image.asset("Assets/Telur/1.jpg")),
                           Text("Day $day",
                               style: const TextStyle(
                                   fontSize: 25, fontWeight: FontWeight.bold)),
