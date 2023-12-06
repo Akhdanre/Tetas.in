@@ -21,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int temp = 38;
   int humd = 38;
   int water = 38;
+  bool isFirst = true;
 
   @override
   Widget build(BuildContext context) {
@@ -93,25 +94,45 @@ class _HomeScreenState extends State<HomeScreen> {
                             offset: const Offset(1.5, 5),
                           )
                         ],
-                        color: baseColorBg,
+                        // color: baseColorBg,
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(20)),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20, vertical: 20),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Align(child: Image.asset("Assets/Telur/1.jpg")),
-                          Text("Day $day",
-                              style: const TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.bold)),
-                          Text(
-                            "Due date : $dueDate",
-                            style: const TextStyle(fontWeight: FontWeight.w300),
+                    child: isFirst
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Align(child: Image.asset("Assets/Telur/1.jpg")),
+                                const Text("START",
+                                    style: TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold))
+                              ],
+                            ),
                           )
-                        ],
-                      ),
-                    ),
+                        : Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 20),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Align(
+                                    child:
+                                        Image.asset("Assets/Telur/$day.jpg")),
+                                Text("Day $day",
+                                    style: const TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold)),
+                                Text(
+                                  "Due date : $dueDate",
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w300),
+                                )
+                              ],
+                            ),
+                          ),
                   ),
                   SizedBox(
                     height: screen.vertical2,
