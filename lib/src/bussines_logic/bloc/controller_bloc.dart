@@ -26,7 +26,7 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
       time = 3;
       _tempValue = event.temp;
       emit(ControllerTempUpdate(tempSliderValue: event.temp));
-      _startTimer();
+      _startTimer(emit);
     });
 
     on<UpdateHumdLimit>((event, emit) {
@@ -34,17 +34,18 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
       time = 3;
       _humdValue = event.humd;
       emit(ControllerHumdUpdate(humdSliderValue: event.humd));
-      _startTimer();
+      _startTimer(emit);
     });
   }
 
-  void _startTimer() {
+  void _startTimer(Emitter<ControllerState> emit) {
     _timer?.cancel();
     _timer = Timer.periodic(duration, (timer) {
       if (time == 0 && isvalueChange) {
         timer.cancel();
         isvalueChange = false;
         _sendToInku();
+        emit(ShowScaffold());
       }
       time--;
     });
