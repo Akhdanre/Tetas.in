@@ -33,14 +33,27 @@ class _ControllerScreenState extends State<ControllerScreen> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(18),
               ),
-              // margin: EdgeInsets.only(
-              //     bottom: MediaQuery.of(context).size.height - 150,
-              //     right: 20,
-              //     left: 20),
-              margin: EdgeInsets.all(8.0),
+              margin: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height - 160,
+                  right: 20,
+                  left: 20),
+              // margin: EdgeInsets.all(8.0),
               content: const Padding(
                 padding: EdgeInsets.all(4.0),
-                child: Text('suhu dan kelembapan berhasil di atur!'),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Pemberitahuan',
+                      style:
+                          TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Text('suhu dan kelembapan berhasil di atur!'),
+                  ],
+                ),
               ),
             ));
           }
