@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tetas_in/src/bussines_logic/cubit/auth_cubit.dart';
+import 'package:tetas_in/src/presentation/widgets/password_field_custom.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/pages/base_screen.dart';
@@ -98,14 +99,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 15,
                     ),
-                    const Text(
-                      "password",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    TextFieldCustom(controller: password, hintTxt: "password"),
+                    PasswordFieldCustom(
+                        title: "Password",
+                        textHint: "lorem",
+                        controller: password)
                   ],
                 ),
                 const SizedBox(
@@ -120,7 +117,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         context
                             .read<AuthCubit>()
                             .login(username.text, password.text);
-                            
                       },
                       style: ElevatedButton.styleFrom(
                           shape: const StadiumBorder(),
