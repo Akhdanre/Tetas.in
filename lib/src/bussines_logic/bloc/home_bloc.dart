@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:tetas_in/config/base_url.dart';
 import 'dart:convert';
 
 import 'package:web_socket_channel/io.dart';
@@ -12,7 +13,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc() : super(HomeInitial()) {
     _webSocketChannel =
-        IOWebSocketChannel.connect('ws://10.10.10.251:8000/ws/control');
+        IOWebSocketChannel.connect('ws://${BaseUrl.host}:8000/ws/control');
     onWsListen();
 
     on<UpdateDataRequest>(
@@ -40,7 +41,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         _webSocketChannel.sink.close();
 
         _webSocketChannel =
-            IOWebSocketChannel.connect('ws://10.10.10.251:8000/ws/control');
+            IOWebSocketChannel.connect('ws://${BaseUrl.host}:8000/ws/control');
       },
     );
   }

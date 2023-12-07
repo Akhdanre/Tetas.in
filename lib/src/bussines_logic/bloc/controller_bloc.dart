@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:tetas_in/config/base_url.dart';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
@@ -43,7 +44,7 @@ class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {
 
   void _connect() {
     _webSocketChannel =
-        IOWebSocketChannel.connect('ws://10.10.10.251:8000/ws/control');
+        IOWebSocketChannel.connect('ws://${BaseUrl.host}:8000/ws/control');
     _webSocketChannel.stream.listen(
       (dynamic data) {},
       onDone: () {

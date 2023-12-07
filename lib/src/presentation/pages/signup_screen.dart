@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tetas_in/src/bussines_logic/cubit/register_cubit.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
@@ -68,7 +70,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     height: 20,
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      context
+                          .read<RegisterCubit>()
+                          .register(username.text, password.text, name.text);
+                    },
                     style: ElevatedButton.styleFrom(
                         shape: const StadiumBorder(),
                         backgroundColor: yellowString,

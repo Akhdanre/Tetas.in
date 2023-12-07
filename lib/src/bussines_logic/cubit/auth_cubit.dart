@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:tetas_in/config/base_url.dart';
 import 'package:tetas_in/src/data/models/base_model_response.dart';
 import 'package:tetas_in/src/data/models/login_request.dart';
 import 'package:tetas_in/src/utils/shared_preferences/user_data.dart';
@@ -34,7 +35,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<String> loginRequest(LoginRequest user) async {
-    Uri url = Uri.parse("http://10.10.10.251:8000/api/authentication");
+    Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/authentication");
     final jsonData = jsonEncode(user.toJson());
 
     try {

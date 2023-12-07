@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tetas_in/src/bussines_logic/cubit/auth_cubit.dart';
+import 'package:tetas_in/src/bussines_logic/cubit/register_cubit.dart';
+import 'package:tetas_in/src/presentation/pages/signup_screen.dart';
 import 'package:tetas_in/src/presentation/widgets/password_field_custom.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
@@ -135,7 +137,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       children: [
                         const Text("Don't have an account? "),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider(
+                                  create: (context) => RegisterCubit(),
+                                  child: const SignUpScreen(),
+                                ),
+                              ),
+                            );
+                          },
                           child: const Text(
                             "Sign Up",
                             style: TextStyle(color: blueString),

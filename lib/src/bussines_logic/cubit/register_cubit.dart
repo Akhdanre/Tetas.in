@@ -10,7 +10,7 @@ part 'register_state.dart';
 class RegisterCubit extends Cubit<RegisterState> {
   RegisterCubit() : super(RegisterInitial());
 
-  Future<void> login(String username, String password, String name) async {
+  Future<void> register(String username, String password, String name) async {
     try {
       emit(RegisterLoading());
       RegisterRequest requestRequirement =
