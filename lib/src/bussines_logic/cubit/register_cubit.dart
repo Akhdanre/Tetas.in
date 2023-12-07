@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
+import 'package:tetas_in/config/base_url.dart';
 import 'package:tetas_in/src/data/models/user_request.dart';
 
 part 'register_state.dart';
@@ -15,13 +16,13 @@ class RegisterCubit extends Cubit<RegisterState> {
       emit(RegisterLoading());
       RegisterRequest requestRequirement =
           RegisterRequest(username: username, password: password, name: name);
-      var data = registerRequest(requestRequirement);
-      print(data);
-      // if () {
-      //   emit(RegisterSuccess());
-      // } else {
-      //   emit(RegisterError(message: "Invalid credentials"));
-      // }
+      var data = await registerRequest(requestRequirement);
+      var dataMap = jsonDecode(data);
+      if (dataMap["data"] == "ok") {
+        emit(RegisterSuccess());
+      } else {
+        emit(RegisterError(message: "Invalid credentials"));
+      }
     } catch (e) {
       log("error : $e");
       emit(RegisterError(message: "An error occurred during register."));
@@ -29,7 +30,7 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   Future<String> registerRequest(RegisterRequest request) async {
-    Uri url = Uri.parse("http://10.10.10.251:8000/api/user");
+    Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/user");
     final jsonData = jsonEncode(request.toJson());
 
     try {
