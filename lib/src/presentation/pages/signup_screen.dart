@@ -71,9 +71,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      context
-                          .read<RegisterCubit>()
-                          .register(username.text, password.text, name.text);
+                      context.read<RegisterCubit>().register(
+                          username.text,
+                          password.text,
+                          name.text,
+                          inkubatorId.text,
+                          token.text);
                     },
                     style: ElevatedButton.styleFrom(
                         shape: const StadiumBorder(),
