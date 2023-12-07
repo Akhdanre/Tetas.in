@@ -13,10 +13,10 @@ class PasswordFieldCustom extends StatefulWidget {
   final TextEditingController controller;
 
   @override
-  _PasswordFieldCustomState createState() => _PasswordFieldCustomState();
+  PasswordFieldCustomState createState() => PasswordFieldCustomState();
 }
 
-class _PasswordFieldCustomState extends State<PasswordFieldCustom> {
+class PasswordFieldCustomState extends State<PasswordFieldCustom> {
   bool _isObscure = true;
 
   @override
