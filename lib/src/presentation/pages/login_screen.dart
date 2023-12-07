@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         const Text("Don't have an account? "),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacement(
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => BlocProvider(

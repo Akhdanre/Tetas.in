@@ -21,17 +21,17 @@ class RegisterCubit extends Cubit<RegisterState> {
 
       InkuUserRequest inku =
           InkuUserRequest(id: idInku, token: token, username: username);
-      var data = await registerRequest(requestRequirement);
-      var dataMap = jsonDecode(data);
-
+      http.Response data = await registerRequest(requestRequirement);
+      var dataMap = jsonDecode(data.body);
       var result = await inkuRequest(inku);
       var dataInkures = jsonDecode(result);
+      
       if (dataMap["data"] == "ok" && dataInkures["data"] == "ok") {
         emit(RegisterSuccess());
       } else if (dataMap["data"] == null) {
         emit(RegisterError(message: "check again your field"));
       } else if (dataInkures["data"] == null) {
-        emit(RegisterError(message: "inkubars not found"));
+        emit(RegisterError(message: dataInkures["errors"]));
       }
     } catch (e) {
       log("error : $e");
@@ -39,29 +39,21 @@ class RegisterCubit extends Cubit<RegisterState> {
     }
   }
 
-  Future<String> registerRequest(RegisterRequest request) async {
+  Future<http.Response> registerRequest(RegisterRequest request) async {
     Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/user");
     final jsonData = jsonEncode(request.toJson());
 
-    try {
-      var response = await http.post(
-        url,
-        body: jsonData,
-        headers: {"Content-Type": 'application/json'},
-      );
+    var response = await http.post(
+      url,
+      body: jsonData,
+      headers: {"Content-Type": 'application/json'},
+    );
 
-      if (response.statusCode == 200) {
-        return response.body;
-      } else {
-        throw Exception("Failed to authenticate");
-      }
-    } catch (e) {
-      throw Exception("Failed to communicate with the server");
-    }
+    return response;
   }
 
   Future<String> inkuRequest(InkuUserRequest inkureq) async {
-    Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/user");
+    Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/inku/user");
     final jsonData = jsonEncode(inkureq.toJson());
 
     try {
@@ -77,7 +69,7 @@ class RegisterCubit extends Cubit<RegisterState> {
         throw Exception("Failed to authenticate");
       }
     } catch (e) {
-      throw Exception("Failed to communicate with the server");
+      throw Exception(e);
     }
   }
 }
