@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tetas_in/src/bussines_logic/cubit/auth_cubit.dart';
 import 'package:tetas_in/src/presentation/pages/about_screen.dart';
 import 'package:tetas_in/src/presentation/pages/add_inkubator.dart';
 import 'package:tetas_in/src/presentation/pages/language_selection_screen.dart';
@@ -121,7 +123,10 @@ class SettingScreen extends StatelessWidget {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const LoginScreen(),
+                              builder: (context) => BlocProvider(
+                                create: (context) => AuthCubit(),
+                                child: const LoginScreen(),
+                              ),
                             ));
                       },
                       style: ElevatedButton.styleFrom(
