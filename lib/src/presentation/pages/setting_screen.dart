@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:tetas_in/src/presentation/pages/about_screen.dart';
 import 'package:tetas_in/src/presentation/pages/add_inkubator.dart';
 import 'package:tetas_in/src/presentation/pages/language_selection_screen.dart';
 import 'package:tetas_in/src/presentation/pages/list_inkubators_screen.dart';
 import 'package:tetas_in/src/presentation/pages/login_screen.dart';
 import 'package:tetas_in/src/presentation/pages/profile_screen.dart';
-import 'package:tetas_in/src/presentation/pages/start_inku_screen.dart';
 import 'package:tetas_in/src/presentation/widgets/app_bar_custom.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
 import 'package:tetas_in/src/presentation/widgets/button_menu.dart';
@@ -113,7 +113,7 @@ class SettingScreen extends StatelessWidget {
                     const ButtonMenu(
                       icon: Icons.edit,
                       text: "About Tetasin",
-                      target: StartInkuPage(),
+                      target: AboutPage(),
                     ),
                     const Spacer(),
                     ElevatedButton(
