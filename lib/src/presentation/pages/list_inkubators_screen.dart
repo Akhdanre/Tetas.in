@@ -12,9 +12,6 @@ class ListInkubatorsPage extends StatefulWidget {
 }
 
 class _ListInkubatorsPageState extends State<ListInkubatorsPage> {
-  // Assuming these values are declared somewhere
-
-  // Generate some dummy data for the list
   List<String> inkubatorData = List.generate(
       50, (index) => index > 8 ? "INK00${index + 1}" : "INK000${index + 1}");
 
@@ -89,7 +86,7 @@ class _ListInkubatorsPageState extends State<ListInkubatorsPage> {
                                         Text(inkubatorData[index]),
                                       ],
                                     ),
-                                    Text("kjenucuokbn"),
+                                    const Text("kjenucuokbn"),
                                     const Text("Delete"),
                                   ],
                                 ),
