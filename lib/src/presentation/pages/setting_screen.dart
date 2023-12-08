@@ -116,7 +116,7 @@ class SettingScreen extends StatelessWidget {
                           backgroundColor: yellowString,
                           minimumSize: const Size.fromHeight(40)),
                       child: const Text(
-                        "LOGIN",
+                        "LOGOUT",
                         style: TextStyle(color: Colors.black, fontSize: 18),
                       ),
                     ),
