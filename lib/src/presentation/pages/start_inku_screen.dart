@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tetas_in/src/presentation/widgets/app_bar_custom.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
 import 'package:tetas_in/src/presentation/widgets/text_field_custom_all.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
@@ -28,22 +29,7 @@ class _StartInkuPageState extends State<StartInkuPage> {
                     horizontal: screen.horizontal2, vertical: screen.vertical2),
                 child: Column(
                   children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.pop(context),
-                          child: const Icon(Icons.arrow_back_ios_new),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        const Text(
-                          "Tambahkan Jumlah Telur",
-                          style: TextStyle(
-                              fontSize: 25, fontWeight: FontWeight.bold),
-                        )
-                      ],
-                    ),
+                    const AppBarCustom(title: "Tambahkan Jumlah Telur"),
                     const SizedBox(
                       height: 30,
                     ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tetas_in/src/bussines_logic/bloc/home_bloc.dart';
+import 'package:tetas_in/src/presentation/pages/setting_screen.dart';
 import 'package:tetas_in/src/presentation/pages/start_inku_screen.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
@@ -69,15 +70,22 @@ class _HomeScreenState extends State<HomeScreen> {
                           )
                         ],
                       ),
-                      Container(
-                        height: 70,
-                        width: 70,
-                        decoration: const BoxDecoration(
-                            image: DecorationImage(
-                                image: AssetImage("Assets/user_image.png"),
-                                fit: BoxFit.cover),
-                            color: Colors.white,
-                            shape: BoxShape.circle),
+                      GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const SettingScreen(),
+                            )),
+                        child: Container(
+                          height: 70,
+                          width: 70,
+                          decoration: const BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage("Assets/user_image.png"),
+                                  fit: BoxFit.cover),
+                              color: Colors.white,
+                              shape: BoxShape.circle),
+                        ),
                       )
                     ],
                   ),
