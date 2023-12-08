@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tetas_in/src/presentation/pages/add_inkubator.dart';
 import 'package:tetas_in/src/presentation/pages/list_inkubators_screen.dart';
 import 'package:tetas_in/src/presentation/pages/login_screen.dart';
 import 'package:tetas_in/src/presentation/pages/profile_screen.dart';
@@ -87,7 +88,7 @@ class SettingScreen extends StatelessWidget {
                     const ButtonMenu(
                       icon: Icons.edit,
                       text: "Add Inkubator",
-                      target: StartInkuPage(),
+                      target: AddInkubatorPage(),
                     ),
                     const SizedBox(
                       height: 10,
