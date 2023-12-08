@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tetas_in/src/presentation/pages/login_screen.dart';
+import 'package:tetas_in/src/presentation/pages/profile_screen.dart';
 import 'package:tetas_in/src/presentation/pages/start_inku_screen.dart';
 import 'package:tetas_in/src/presentation/widgets/app_bar_custom.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
@@ -25,53 +26,62 @@ class SettingScreen extends StatelessWidget {
                     const AppBarCustom(title: "Setting"),
                     Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: screen.horizontal3, vertical: 30),
-                      child: Row(
-                        children: [
-                          Container(
-                            height: 50,
-                            width: 50,
-                            decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                    image: AssetImage("Assets/user_image.png"),
-                                    fit: BoxFit.cover),
-                                color: Colors.white,
-                                shape: BoxShape.circle),
-                          ),
-                          const SizedBox(
-                            width: 20,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                "Akeon",
-                                style: TextStyle(fontSize: 18),
-                              ),
-                              Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: 10,
-                                      height: 10,
-                                      decoration: const BoxDecoration(
-                                          color:
-                                              Color.fromARGB(255, 96, 255, 101),
-                                          shape: BoxShape.circle),
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    const Text("ID Inkubator : INK0001")
-                                  ])
-                            ],
-                          ),
-                          const Spacer(),
-                          GestureDetector(
-                            child: const Icon(Icons.arrow_forward_ios_outlined),
-                          )
-                        ],
+                          horizontal: screen.horizontal3, vertical: 40),
+                      child: GestureDetector(
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ProfilePage(),
+                            )),
+                        child: Row(
+                          children: [
+                            Container(
+                              height: 50,
+                              width: 50,
+                              decoration: const BoxDecoration(
+                                  image: DecorationImage(
+                                      image:
+                                          AssetImage("Assets/user_image.png"),
+                                      fit: BoxFit.cover),
+                                  color: Colors.white,
+                                  shape: BoxShape.circle),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Akeon",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: 10,
+                                        height: 10,
+                                        decoration: const BoxDecoration(
+                                            color: Color.fromARGB(
+                                                255, 96, 255, 101),
+                                            shape: BoxShape.circle),
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      const Text("ID Inkubator : INK0001")
+                                    ])
+                              ],
+                            ),
+                            const Spacer(),
+                            const Icon(Icons.arrow_forward_ios_outlined),
+                          ],
+                        ),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 20,
                     ),
                     const ButtonMenu(
                       icon: Icons.edit,
