@@ -17,20 +17,24 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(AuthLoading());
 
-      final data = await loginRequest(
-          LoginRequest(username: username, password: password));
-      var jsonData = jsonDecode(data);
-      BaseModel tokendata = BaseModel.fromJson(jsonData);
+      if (username.length >= 7 && password.length >= 8) {
+        final data = await loginRequest(
+            LoginRequest(username: username, password: password));
+        var jsonData = jsonDecode(data);
+        BaseModel tokendata = BaseModel.fromJson(jsonData);
 
-      if (tokendata.data.token.isNotEmpty) {
-        UserData().setToken(tokendata.data.token);
-        emit(AuthSuccess());
+        if (tokendata.data.token.isNotEmpty) {
+          UserData().setToken(tokendata.data.token);
+          emit(AuthSuccess());
+        } else {
+          emit(AuthError(message: "Invalid credentials"));
+        }
       } else {
-        emit(AuthError(message: "Invalid credentials"));
+        emit(AuthError(message: "field harus lebih dari 8 karakter"));
       }
     } catch (e) {
       log("error : $e");
-      emit(AuthError(message: "An error occurred during login."));
+      emit(AuthError(message: "cek kembali username dan password"));
     }
   }
 

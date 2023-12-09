@@ -16,14 +16,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  String user = "Akeon";
-  String idIncubator = "IND00001";
-  int day = 15;
+  String user = "akhdanre";
+  String idIncubator = "IND00004";
+  int day = 1;
   String dueDate = "12-12-2023";
   int temp = 38;
   int humd = 38;
   int water = 38;
-  bool isFirst = true;
+  bool isFirst = false;
 
   @override
   Widget build(BuildContext context) {

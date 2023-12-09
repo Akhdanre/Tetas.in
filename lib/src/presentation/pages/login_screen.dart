@@ -8,7 +8,6 @@ import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/pages/base_screen.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
-import 'package:tetas_in/src/presentation/widgets/forgot_pass_widget.dart';
 import 'package:tetas_in/src/presentation/widgets/regard_widget.dart';
 import 'package:tetas_in/src/presentation/widgets/text_form_field_custom.dart';
 
@@ -110,7 +109,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                const ForgotPassTextWidget(),
                 const Spacer(),
                 Column(
                   children: [
@@ -135,7 +133,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Text("Don't have an account? "),
+                        const Text("Belum punya akun? "),
                         GestureDetector(
                           onTap: () {
                             Navigator.push(

@@ -18,6 +18,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     SizeConfig screen = SizeConfig(context);
+    name.text = "akhdan robbani";
+
     return Scaffold(
       body: SafeArea(
           child: Background(
@@ -60,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         title: "Email", textHint: "", controller: email),
                     TextFieldCustomAll(
                         title: "Incubator Active",
-                        textHint: "",
+                        textHint: "INK0004",
                         controller: email),
                     const Spacer(),
                     ElevatedButton(
@@ -72,7 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           backgroundColor: yellowString,
                           minimumSize: const Size.fromHeight(40)),
                       child: const Text(
-                        "SAVE",
+                        "SAVE ",
                         style: TextStyle(color: Colors.black, fontSize: 18),
                       ),
                     ),

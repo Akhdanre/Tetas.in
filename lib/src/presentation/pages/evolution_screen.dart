@@ -14,7 +14,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
   int day = 15;
   String dueDate = "12-12-2023";
   String description =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus facilisis non mauris id sodales. Maecenas id tincidunt ligula. Fusce leo dui, accumsan at leo sit amet, lobortis interdum felis.v";
+      "Pada hari ke-15 penetasan telur, perkembangan embrio telah mencapai tahap yang lebih maju. Zigot yang telah mengalami serangkaian pembelahan sel membentuk struktur yang disebut blastula, dengan sel-sel yang mengalami diferensiasi";
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,9 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                         height: 40,
                         width: 40,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: index == 0 || index == 14
+                              ? yellowString
+                              : Colors.white,
                           boxShadow: [
                             BoxShadow(
                               color: Colors.grey.withOpacity(0.5),
@@ -68,7 +70,6 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                   height: 20,
                 ),
                 Container(
-                  height: 350,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -78,7 +79,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                         offset: const Offset(1.5, 5),
                       )
                     ],
-                    color: baseColorBg,
+                    color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Padding(
@@ -87,7 +88,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Align(child: Image.asset("Assets/egg_image_15.png")),
+                        Align(child: Image.asset("Assets/Telur/15.jpg")),
                         Text("Day $day",
                             style: const TextStyle(
                                 fontSize: 25, fontWeight: FontWeight.bold)),

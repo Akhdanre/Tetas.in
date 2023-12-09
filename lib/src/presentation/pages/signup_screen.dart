@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tetas_in/src/bussines_logic/cubit/auth_cubit.dart';
 import 'package:tetas_in/src/bussines_logic/cubit/register_cubit.dart';
 import 'package:tetas_in/src/presentation/pages/login_screen.dart';
+import 'package:tetas_in/src/presentation/widgets/password_field_custom.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
@@ -97,16 +98,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       title: "Name",
                       textHint: "ayam",
                     ),
-                    TextFieldCustomAll(
-                      controller: password,
-                      title: "Password",
-                      textHint: "",
-                    ),
-                    TextFieldCustomAll(
-                      controller: passwordconfirm,
-                      title: "Confirm Password",
-                      textHint: "",
-                    ),
+                    PasswordFieldCustom(
+                        title: "Password", textHint: "", controller: password),
+                    PasswordFieldCustom(
+                        title: "Confirm Password",
+                        textHint: "",
+                        controller: passwordconfirm),
                     TextFieldCustomAll(
                       controller: inkubatorId,
                       title: "ID Inkubator",

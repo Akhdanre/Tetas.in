@@ -15,7 +15,7 @@ class LanguageSelectionScreen extends StatefulWidget {
 class _LanguageSelectionScreenState extends State<LanguageSelectionScreen> {
   TextEditingController textEdit = TextEditingController();
   String selectedLanguage = 'English';
-  List<String> languages = ['English', 'Spanish', 'French'];
+  List<String> languages = ['English', 'Indonesia'];
 
   @override
   Widget build(BuildContext context) {

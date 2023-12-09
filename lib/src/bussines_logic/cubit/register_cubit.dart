@@ -25,7 +25,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       var dataMap = jsonDecode(data.body);
       var result = await inkuRequest(inku);
       var dataInkures = jsonDecode(result);
-      
+
       if (dataMap["data"] == "ok" && dataInkures["data"] == "ok") {
         emit(RegisterSuccess());
       } else if (dataMap["data"] == null) {
@@ -35,7 +35,7 @@ class RegisterCubit extends Cubit<RegisterState> {
       }
     } catch (e) {
       log("error : $e");
-      emit(RegisterError(message: "An error occurred during register."));
+      emit(RegisterError(message: "Cek kembali data field anda"));
     }
   }
 

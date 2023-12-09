@@ -87,14 +87,14 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("day"),
-                            Text("Tempereature"),
-                            Text("Humadity"),
+                            Text("Start Date"),
+                            Text("ID Incubator"),
+                            Text("Token"),
                           ],
                         ),
                         ListView.builder(
                           shrinkWrap: true,
-                          itemCount: 5,
+                          itemCount: 0,
                           itemBuilder: (context, index) => Column(
                             children: [
                               const Divider(
@@ -106,9 +106,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text("${index + 1}"),
-                                  Text("$tempValue"),
-                                  Text("$humdValue"),
+                                  Text("8/12/2023"),
+                                  Text("INK0004"),
+                                  Text("ikbclzpeyk"),
                                 ],
                               ),
                             ],
