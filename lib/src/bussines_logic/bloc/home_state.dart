@@ -15,3 +15,9 @@ final class HomeUpdate extends HomeState {
   HomeUpdate(
       {required this.temp, required this.humd, required this.waterVolume});
 }
+
+final class UpdateDayProgress extends HomeState {
+  int day;
+
+  UpdateDayProgress({required this.day});
+}

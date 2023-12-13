@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+import 'package:http/http.dart' as http;
+
 part 'home_event.dart';
 part 'home_state.dart';
 
@@ -13,6 +15,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   HomeBloc() : super(HomeInitial()) {
     _connectToWebSocket();
+    progressDay();
     on<UpdateDataRequest>(
       (event, emit) {
         emit(HomeUpdate(
@@ -22,6 +25,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         ));
       },
     );
+
+    on<DataProgressRequest>(
+      (event, emit) {
+        emit(UpdateDayProgress(day: event.day));
+      },
+    );
   }
 
   void _connectToWebSocket() {
@@ -29,7 +38,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     _webSocketChannel = IOWebSocketChannel.connect(webSocketUri);
 
     onWsListen();
-    
   }
 
   void onWsListen() {
@@ -58,6 +66,25 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         _connectToWebSocket();
       },
     );
+  }
+
+  progressDay() async {
+    http.Response response = await getProgress();
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      add(DataProgressRequest(day: data["data"]));
+    }
+  }
+
+  Future<http.Response> getProgress() async {
+    Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/progress/INK0001");
+
+    var response = await http.get(
+      url,
+      headers: {"Content-Type": 'application/json'},
+    );
+
+    return response;
   }
 
   @override

@@ -171,8 +171,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           }
                           return StatusInfoInku(
-                            value: (state as HomeInitial)
-                                .defaultValue, // Assuming temp is the temperature property in HomeInitial
+                            value: 0,
                             title: 'Temperature',
                           );
                         },
@@ -186,8 +185,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           }
                           return StatusInfoInku(
-                            value: (state as HomeInitial)
-                                .defaultValue, // Assuming temp is the temperature property in HomeInitial
+                            value:
+                                0, // Assuming temp is the temperature property in HomeInitial
                             title: 'Humidity',
                           );
                         },
@@ -201,8 +200,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           }
                           return StatusInfoInku(
-                            value: (state as HomeInitial)
-                                .defaultValue, // Assuming temp is the temperature property in HomeInitial
+                            value:
+                                0, // Assuming temp is the temperature property in HomeInitial
                             title: 'water',
                           );
                         },

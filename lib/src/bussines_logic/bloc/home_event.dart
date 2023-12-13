@@ -12,3 +12,9 @@ final class UpdateDataRequest extends HomeEvent {
   UpdateDataRequest(
       {required this.temp, required this.humd, required this.water});
 }
+
+final class DataProgressRequest extends HomeEvent {
+  int day;
+
+  DataProgressRequest({required this.day});
+}
