@@ -12,36 +12,50 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   late WebSocketChannel _webSocketChannel;
 
   HomeBloc() : super(HomeInitial()) {
-    _webSocketChannel =
-        IOWebSocketChannel.connect('ws://${BaseUrl.host}:8000/ws/control');
-    onWsListen();
-
+    _connectToWebSocket();
     on<UpdateDataRequest>(
       (event, emit) {
         emit(HomeUpdate(
-            temp: event.temp, humd: event.humd, waterVolume: event.water));
+          temp: event.temp,
+          humd: event.humd,
+          waterVolume: event.water,
+        ));
       },
     );
+  }
+
+  void _connectToWebSocket() {
+    Uri webSocketUri = Uri.parse('ws://${BaseUrl.host}:8000/ws/control');
+    _webSocketChannel = IOWebSocketChannel.connect(webSocketUri);
+
+    onWsListen();
+    
   }
 
   void onWsListen() {
     _webSocketChannel.stream.listen(
       (message) {
-        Map<String, dynamic> data = json.decode(message);
-        if (data['sender'] == 'inku' &&
-            data['action'] == 'post' &&
-            data['request'] == 'send_data') {
-          int temp = data['data']['temp'];
-          int humd = data['data']['humd'];
-          int water = data['data']['water'];
-          add(UpdateDataRequest(temp: temp, humd: humd, water: water));
+        try {
+          Map<String, dynamic> data = json.decode(message);
+          if (data['sender'] == 'inku' &&
+              data['action'] == 'post' &&
+              data['request'] == 'send_data') {
+            int temp = data['data']['temp'];
+            int humd = data['data']['humd'];
+            int water = data['data']['water'];
+            add(UpdateDataRequest(temp: temp, humd: humd, water: water));
+          }
+        } catch (e) {
+          // Handle JSON decoding errors
+          print('Error decoding WebSocket message: $e');
         }
       },
       onError: (error) {
-        _webSocketChannel.sink.close();
-
-        _webSocketChannel =
-            IOWebSocketChannel.connect('ws://${BaseUrl.host}:8000/ws/control');
+        print('WebSocket error: $error');
+      },
+      onDone: () {
+        // WebSocket is closed
+        _connectToWebSocket();
       },
     );
   }
