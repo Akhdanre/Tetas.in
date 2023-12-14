@@ -107,6 +107,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(20)),
                       child: BlocBuilder<HomeBloc, HomeState>(
+                        buildWhen: (previous, current) =>
+                            previous != current && current is UpdateDayProgress,
                         builder: (context, state) {
                           if (state is UpdateDayProgress) {
                             return Padding(
@@ -167,35 +169,42 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       BlocBuilder<HomeBloc, HomeState>(
+                        buildWhen: (previous, current) =>
+                            previous != current && current is HomeUpdate,
                         builder: (context, state) {
+                          print("temp still update");
                           if (state is HomeUpdate) {
                             return StatusInfoInku(
                               value: state.temp,
                               title: 'Temperature',
                             );
                           }
-                          return StatusInfoInku(
+                          return const StatusInfoInku(
                             value: 0,
                             title: 'Temperature',
                           );
                         },
                       ),
                       BlocBuilder<HomeBloc, HomeState>(
+                        buildWhen: (previous, current) =>
+                            previous != current && current is HomeUpdate,
                         builder: (context, state) {
+                          print("humd still update");
                           if (state is HomeUpdate) {
                             return StatusInfoInku(
                               value: state.humd,
                               title: 'Humidity',
                             );
                           }
-                          return StatusInfoInku(
-                            value:
-                                0, // Assuming temp is the temperature property in HomeInitial
+                          return const StatusInfoInku(
+                            value: 0,
                             title: 'Humidity',
                           );
                         },
                       ),
                       BlocBuilder<HomeBloc, HomeState>(
+                        buildWhen: (previous, current) =>
+                            previous != current && current is HomeUpdate,
                         builder: (context, state) {
                           if (state is HomeUpdate) {
                             return StatusInfoInku(
@@ -203,9 +212,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               title: 'Water Volume',
                             );
                           }
-                          return StatusInfoInku(
-                            value:
-                                0, // Assuming temp is the temperature property in HomeInitial
+                          return const StatusInfoInku(
+                            value: 0,
                             title: 'water',
                           );
                         },
