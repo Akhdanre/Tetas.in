@@ -93,21 +93,45 @@ class _HomeScreenState extends State<HomeScreen> {
                     height: screen.vertical2,
                   ),
                   Container(
-                    // height: 350,
-                    decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 1,
-                            blurRadius: 4,
-                            offset: const Offset(1.5, 5),
-                          )
-                        ],
-                        // color: baseColorBg,
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20)),
-                    child: isFirst
-                        ? GestureDetector(
+                      // height: 350,
+                      decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 4,
+                              offset: const Offset(1.5, 5),
+                            )
+                          ],
+                          // color: baseColorBg,
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20)),
+                      child: BlocBuilder<HomeBloc, HomeState>(
+                        builder: (context, state) {
+                          if (state is UpdateDayProgress) {
+                            return Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 20),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Align(
+                                      child: Image.asset(
+                                          "Assets/Telur/${state.day}.jpg")),
+                                  Text("Day ${state.day}",
+                                      style: const TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold)),
+                                  Text(
+                                    "Due date : $dueDate",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w300),
+                                  )
+                                ],
+                              ),
+                            );
+                          }
+                          return GestureDetector(
                             onTap: () {
                               Navigator.push(
                                   context,
@@ -133,29 +157,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ],
                               ),
                             ),
-                          )
-                        : Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Align(
-                                    child:
-                                        Image.asset("Assets/Telur/$day.jpg")),
-                                Text("Day $day",
-                                    style: const TextStyle(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold)),
-                                Text(
-                                  "Due date : $dueDate",
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.w300),
-                                )
-                              ],
-                            ),
-                          ),
-                  ),
+                          );
+                        },
+                      )),
                   SizedBox(
                     height: screen.vertical2,
                   ),

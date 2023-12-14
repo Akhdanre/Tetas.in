@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:tetas_in/config/base_url.dart';
 import 'dart:convert';
@@ -54,15 +56,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
             add(UpdateDataRequest(temp: temp, humd: humd, water: water));
           }
         } catch (e) {
-          // Handle JSON decoding errors
-          print('Error decoding WebSocket message: $e');
+          log('Error decoding WebSocket message: $e');
         }
       },
       onError: (error) {
-        print('WebSocket error: $error');
+        log('WebSocket error: $error');
       },
       onDone: () {
-        // WebSocket is closed
         _connectToWebSocket();
       },
     );
@@ -77,7 +77,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Future<http.Response> getProgress() async {
-    Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/progress/INK0001");
+    Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/progress/INK0004");
 
     var response = await http.get(
       url,

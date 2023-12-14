@@ -21,3 +21,5 @@ final class UpdateDayProgress extends HomeState {
 
   UpdateDayProgress({required this.day});
 }
+
+final class NotOnProgress extends HomeState {}
