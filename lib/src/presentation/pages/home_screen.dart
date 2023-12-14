@@ -252,23 +252,51 @@ class _HomeScreenState extends State<HomeScreen> {
                                   thumbColor: Colors.transparent,
                                   thumbShape: const RoundSliderThumbShape(
                                       enabledThumbRadius: 0.0)),
-                              child: Stack(
-                                children: [
-                                  Slider(
-                                      max: 100,
-                                      value: 20,
-                                      inactiveColor: grayTransparentString,
-                                      onChanged: (value) {}),
-                                  const Padding(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 16, horizontal: 40),
-                                    child: Text(
-                                      "12%",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ],
+                              child: BlocBuilder<HomeBloc, HomeState>(
+                                buildWhen: (previous, current) =>
+                                    previous != current &&
+                                    current is UpdateDayProgress,
+                                builder: (context, state) {
+                                  if (state is UpdateDayProgress) {
+                                    return Stack(
+                                      children: [
+                                        Slider(
+                                            max: 21,
+                                            value: state.day.toDouble(),
+                                            inactiveColor:
+                                                grayTransparentString,
+                                            onChanged: (value) {}),
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              vertical: 16, horizontal: 40),
+                                          child: Text(
+                                            "${state.day}%",
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    );
+                                  }
+                                  return Stack(
+                                    children: [
+                                      Slider(
+                                          max: 21,
+                                          value: 1,
+                                          inactiveColor: grayTransparentString,
+                                          onChanged: (value) {}),
+                                      const Padding(
+                                        padding: EdgeInsets.symmetric(
+                                            vertical: 16, horizontal: 40),
+                                        child: Text(
+                                          "12%",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  );
+                                },
                               )),
                         ],
                       ),
