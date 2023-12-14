@@ -16,6 +16,8 @@ class BaseScreen extends StatefulWidget {
 
 class _BaseScreenState extends State<BaseScreen> {
   int selectedIndex = 0;
+  PageController pageController = PageController();
+
   final List<Widget> _pages = [
     BlocProvider(
       create: (context) => HomeBloc(),
@@ -29,21 +31,24 @@ class _BaseScreenState extends State<BaseScreen> {
     const HistoryScreen()
   ];
 
-  void changeIndex(int value) {
-    setState(() {
-      selectedIndex = value;
-    });
+  void changePage(index) {
+    pageController.jumpToPage(index);
+    selectedIndex = index;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages.elementAt(selectedIndex),
+      body: PageView(
+        controller: pageController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: _pages,
+      ),
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.black,
           currentIndex: selectedIndex,
-          onTap: changeIndex,
+          onTap: changePage,
           items: const [
             BottomNavigationBarItem(
               icon: Icon(Icons.home),
