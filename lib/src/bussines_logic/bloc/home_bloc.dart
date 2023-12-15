@@ -40,6 +40,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     _webSocketChannel = IOWebSocketChannel.connect(webSocketUri);
 
     onWsListen();
+    requestFirstInfo();
+  }
+
+  void requestFirstInfo() {
+    var data = {"sender": "inku", "action": "get", "request": "info_inku"};
+    _webSocketChannel.sink.add(jsonEncode(data));
   }
 
   void onWsListen() {
@@ -50,10 +56,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           if (data['sender'] == 'inku' &&
               data['action'] == 'post' &&
               data['request'] == 'send_data') {
-            int temp = data['data']['temp'];
-            int humd = data['data']['humd'];
-            int water = data['data']['water'];
-            add(UpdateDataRequest(temp: temp, humd: humd, water: water));
+            updateDataInfo(data["data"]);
+          }
+
+          if (data['sender'] == 'server' && data['action'] == 'send_info') {
+            updateDataInfo(data["data"]);
           }
         } catch (e) {
           log('Error decoding WebSocket message: $e');
@@ -66,6 +73,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         _connectToWebSocket();
       },
     );
+  }
+
+  updateDataInfo(Map data) {
+    int temp = data['temp'];
+    int humd = data['humd'];
+    int water = data['water'];
+    add(UpdateDataRequest(temp: temp, humd: humd, water: water));
   }
 
   progressDay() async {

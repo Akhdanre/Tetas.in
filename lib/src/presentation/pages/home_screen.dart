@@ -19,12 +19,8 @@ class _HomeScreenState extends State<HomeScreen>
     with AutomaticKeepAliveClientMixin {
   String user = "akhdanre";
   String idIncubator = "IND00004";
-  int day = 1;
   String dueDate = "12-12-2023";
-  int temp = 38;
-  int humd = 38;
-  int water = 38;
-  bool isFirst = false;
+  String selectedValue = "INK0001"; // Initialize with a default value
 
   @override
   Widget build(BuildContext context) {
@@ -67,7 +63,31 @@ class _HomeScreenState extends State<HomeScreen>
                               const SizedBox(
                                 width: 5,
                               ),
-                              Text("ID Inkubator $idIncubator")
+                              const Text("ID Inkubator"),
+                              const SizedBox(
+                                width: 3,
+                              ),
+                              DropdownButton<String>(
+                                value: selectedValue,
+                                underline: const SizedBox(),
+                                style: TextStyle(
+                                    fontSize: 14, color: Colors.black),
+                                items: const [
+                                  DropdownMenuItem(
+                                      child: Text("INK0001"), value: "INK0001"),
+                                  DropdownMenuItem(
+                                      child: Text("INK0002"), value: "INK0002"),
+                                  DropdownMenuItem(
+                                      child: Text("INK0003"), value: "INK0003"),
+                                  DropdownMenuItem(
+                                      child: Text("INK0004"), value: "INK0004"),
+                                ],
+                                onChanged: (newValue) {
+                                  setState(() {
+                                    selectedValue = newValue!;
+                                  });
+                                },
+                              )
                             ],
                           )
                         ],
@@ -174,7 +194,6 @@ class _HomeScreenState extends State<HomeScreen>
                         buildWhen: (previous, current) =>
                             previous != current && current is HomeUpdate,
                         builder: (context, state) {
-                          print("temp still update");
                           if (state is HomeUpdate) {
                             return StatusInfoInku(
                               value: state.temp,
@@ -191,7 +210,6 @@ class _HomeScreenState extends State<HomeScreen>
                         buildWhen: (previous, current) =>
                             previous != current && current is HomeUpdate,
                         builder: (context, state) {
-                          print("humd still update");
                           if (state is HomeUpdate) {
                             return StatusInfoInku(
                               value: state.humd,
