@@ -95,9 +95,9 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         ListView.builder(
                           shrinkWrap: true,
                           itemCount: 0,
-                          itemBuilder: (context, index) => Column(
+                          itemBuilder: (context, index) => const Column(
                             children: [
-                              const Divider(
+                              Divider(
                                 color: Colors.black,
                                 height: 20,
                                 thickness: 2,

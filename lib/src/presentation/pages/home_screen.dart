@@ -70,17 +70,25 @@ class _HomeScreenState extends State<HomeScreen>
                               DropdownButton<String>(
                                 value: selectedValue,
                                 underline: const SizedBox(),
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 14, color: Colors.black),
                                 items: const [
                                   DropdownMenuItem(
-                                      child: Text("INK0001"), value: "INK0001"),
+                                    value: "INK0001",
+                                    child: Text("INK0001"),
+                                  ),
                                   DropdownMenuItem(
-                                      child: Text("INK0002"), value: "INK0002"),
+                                    value: "INK0002",
+                                    child: Text("INK0002"),
+                                  ),
                                   DropdownMenuItem(
-                                      child: Text("INK0003"), value: "INK0003"),
+                                    value: "INK0003",
+                                    child: Text("INK0003"),
+                                  ),
                                   DropdownMenuItem(
-                                      child: Text("INK0004"), value: "INK0004"),
+                                    value: "INK0004",
+                                    child: Text("INK0004"),
+                                  ),
                                 ],
                                 onChanged: (newValue) {
                                   setState(() {
