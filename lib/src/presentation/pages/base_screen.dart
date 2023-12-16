@@ -38,35 +38,55 @@ class _BaseScreenState extends State<BaseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: _pages,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.black,
-          currentIndex: selectedIndex,
-          onTap: changePage,
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
+    return WillPopScope(
+        onWillPop: () async {
+          return await showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              actions: [
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                    child: const Text("yes")),
+                TextButton(
+                    onPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                    child: const Text("no")),
+              ],
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.camera),
-              label: 'Evolution',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings),
-              label: 'Controller',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.history_edu_outlined),
-              label: 'History',
-            ),
-          ]),
-    );
+          );
+        },
+        child: Scaffold(
+          body: PageView(
+            controller: pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: _pages,
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: Colors.black,
+              currentIndex: selectedIndex,
+              onTap: changePage,
+              items: const [
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
+                  label: 'Home',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.camera),
+                  label: 'Evolution',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.settings),
+                  label: 'Controller',
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.history_edu_outlined),
+                  label: 'History',
+                ),
+              ]),
+        ));
   }
 }
