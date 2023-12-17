@@ -6,6 +6,7 @@ import 'package:tetas_in/src/bussines_logic/bloc/home_bloc.dart';
 import 'package:tetas_in/src/presentation/pages/setting_screen.dart';
 import 'package:tetas_in/src/presentation/pages/start_inku_screen.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
+import 'package:tetas_in/src/utils/shared_preferences/user_data.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
 import 'package:tetas_in/src/presentation/widgets/status_info_inku_widget.dart';
@@ -23,6 +24,18 @@ class _HomeScreenState extends State<HomeScreen>
   String idIncubator = "IND00004";
   String dueDate = "12-12-2023";
   String selectedValue = "INK0001";
+  late List<String> listInku;
+
+  @override
+  void initState() {
+    dataListInku();
+    super.initState();
+  }
+
+  void dataListInku() async {
+    listInku = await UserData().inkubator;
+    // if(list)
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,7 +86,8 @@ class _HomeScreenState extends State<HomeScreen>
                               BlocBuilder<HomeBloc, HomeState>(
                                 buildWhen: (previous, current) =>
                                     previous != current &&
-                                    current is UpdateInkubatorList,
+                                        current is UpdateInkubatorList ||
+                                    current is UpdateInkubatorSwitch,
                                 builder: (context, state) {
                                   if (state is UpdateInkubatorList) {
                                     selectedValue = state.id[0];
@@ -87,6 +101,28 @@ class _HomeScreenState extends State<HomeScreen>
                                               value: e, child: Text(e)))
                                           .toList(),
                                       onChanged: (newValue) {
+                                        context.read<HomeBloc>().add(
+                                            DataInkubatorSwitch(id: newValue!));
+                                      },
+                                    );
+                                  }
+                                  if (state is UpdateInkubatorSwitch) {
+                                    UserData()
+                                        .inkubator
+                                        .then((value) => listInku = value);
+                                    selectedValue = state.id;
+                                    return DropdownButton<String>(
+                                      value: selectedValue,
+                                      underline: const SizedBox(),
+                                      style: const TextStyle(
+                                          fontSize: 14, color: Colors.black),
+                                      items: listInku
+                                          .map((e) => DropdownMenuItem(
+                                              value: e, child: Text(e)))
+                                          .toList(),
+                                      onChanged: (newValue) {
+                                        context.read<HomeBloc>().add(
+                                            DataInkubatorSwitch(id: newValue!));
                                       },
                                     );
                                   }

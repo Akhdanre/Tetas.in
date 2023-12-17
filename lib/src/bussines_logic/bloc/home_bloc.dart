@@ -40,6 +40,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<DataInkubatorRequest>(
       (event, emit) => emit(UpdateInkubatorList(id: event.id)),
     );
+
+    on<DataInkubatorSwitch>(
+      (event, emit) => emit(UpdateInkubatorSwitch(id: event.id)),
+    );
   }
 
   void _connectToWebSocket() {
@@ -113,6 +117,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       List<String> id = (data["data"] as List).map((e) => e as String).toList();
+      UserData().setInkubator(id);
       add(DataInkubatorRequest(id: id));
     }
   }
