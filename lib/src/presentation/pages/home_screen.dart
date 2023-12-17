@@ -24,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen>
   String idIncubator = "IND00004";
   String dueDate = "12-12-2023";
   String selectedValue = "INK0001";
+  bool islist = false;
   late List<String> listInku;
 
   @override
@@ -34,7 +35,9 @@ class _HomeScreenState extends State<HomeScreen>
 
   void dataListInku() async {
     listInku = await UserData().inkubator;
-    // if(list)
+    if (listInku.isNotEmpty) {
+      islist = true;
+    }
   }
 
   @override
@@ -107,9 +110,11 @@ class _HomeScreenState extends State<HomeScreen>
                                     );
                                   }
                                   if (state is UpdateInkubatorSwitch) {
-                                    UserData()
-                                        .inkubator
-                                        .then((value) => listInku = value);
+                                    if (!islist) {
+                                      UserData()
+                                          .inkubator
+                                          .then((value) => listInku = value);
+                                    }
                                     selectedValue = state.id;
                                     return DropdownButton<String>(
                                       value: selectedValue,
