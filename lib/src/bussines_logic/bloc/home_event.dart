@@ -24,3 +24,9 @@ final class DataInkubatorRequest extends HomeEvent {
 
   DataInkubatorRequest({required this.id});
 }
+
+final class DataInkubatorSwitch extends HomeEvent {
+  String id;
+  
+  DataInkubatorSwitch({required this.id});
+}

@@ -22,10 +22,15 @@ final class UpdateDayProgress extends HomeState {
   UpdateDayProgress({required this.day});
 }
 
+final class NotOnProgress extends HomeState {}
+
 final class UpdateInkubatorList extends HomeState {
   List<String> id;
 
   UpdateInkubatorList({required this.id});
 }
 
-final class NotOnProgress extends HomeState {}
+final class UpdateInkubatorSwitch extends HomeState {
+  String id;
+  UpdateInkubatorSwitch({required this.id});
+}
