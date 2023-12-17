@@ -18,3 +18,9 @@ final class DataProgressRequest extends HomeEvent {
 
   DataProgressRequest({required this.day});
 }
+
+final class DataInkubatorRequest extends HomeEvent {
+  List<String> id;
+
+  DataInkubatorRequest({required this.id});
+}

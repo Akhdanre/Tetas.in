@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:tetas_in/config/base_url.dart';
+import 'package:tetas_in/src/utils/shared_preferences/user_data.dart';
 import 'dart:convert';
 
 import 'package:web_socket_channel/io.dart';
@@ -16,8 +17,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   late WebSocketChannel _webSocketChannel;
 
   HomeBloc() : super(HomeInitial()) {
+    inkubatorId();
     _connectToWebSocket();
     progressDay();
+
     on<UpdateDataRequest>(
       (event, emit) {
         emit(HomeUpdate(
@@ -32,6 +35,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       (event, emit) {
         emit(UpdateDayProgress(day: event.day));
       },
+    );
+
+    on<DataInkubatorRequest>(
+      (event, emit) => emit(UpdateInkubatorList(id: event.id)),
     );
   }
 
@@ -83,19 +90,38 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   progressDay() async {
-    http.Response response = await getProgress();
+    http.Response response = await getProgress("INK0004");
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       add(DataProgressRequest(day: data["data"]));
     }
   }
 
-  Future<http.Response> getProgress() async {
-    Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/progress/INK0004");
+  Future<http.Response> getProgress(String id) async {
+    Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/progress/$id");
 
     var response = await http.get(
       url,
       headers: {"Content-Type": 'application/json'},
+    );
+
+    return response;
+  }
+
+  inkubatorId() async {
+    http.Response response = await getProgress("INK0004");
+    if (response.statusCode == 200) {
+      var data = jsonDecode(response.body);
+      add(DataInkubatorRequest(id: data["data"]));
+    }
+  }
+
+  Future<http.Response> getInkubator(String id) async {
+    Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/inku");
+    String token = await UserData().getToken();
+    var response = await http.get(
+      url,
+      headers: {"Content-Type": 'application/json', "X-API-TOKEN": token},
     );
 
     return response;
