@@ -13,4 +13,7 @@ class InkuData {
   set progress(int day) {
     pref.setInt("day", day);
   }
+
+  Future<int> get day async => pref.getInt("day") ?? 1;
+  
 }
