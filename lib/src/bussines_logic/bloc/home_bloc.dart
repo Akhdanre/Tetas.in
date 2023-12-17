@@ -124,7 +124,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   Future<http.Response> getInkubator() async {
     Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/inku");
-    String token = await UserData().getToken();
+    String token = await UserData().token;
     var response = await http.get(
       url,
       headers: {"Content-Type": 'application/json', "X-API-TOKEN": token},

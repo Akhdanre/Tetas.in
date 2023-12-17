@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:js_interop';
 
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
@@ -23,8 +24,9 @@ class AuthCubit extends Cubit<AuthState> {
         var jsonData = jsonDecode(data);
         BaseModel tokendata = BaseModel.fromJson(jsonData);
 
-        if (tokendata.data.token.isNotEmpty) {
-          UserData().setToken(tokendata.data.token);
+        if (tokendata.data.isDefinedAndNotNull) {
+          var data = tokendata.data;
+          UserData().setUser(data.username, data.name, data.token);
           emit(AuthSuccess());
         } else {
           emit(AuthError(message: "Invalid credentials"));
