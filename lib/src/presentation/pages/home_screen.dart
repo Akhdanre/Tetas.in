@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tetas_in/src/bussines_logic/bloc/home_bloc.dart';
@@ -22,12 +24,11 @@ class _HomeScreenState extends State<HomeScreen>
   String dueDate = "12-12-2023";
   String selectedValue = "INK0001";
 
-
-
   @override
   Widget build(BuildContext context) {
     super.build(context);
     SizeConfig screen = SizeConfig(context);
+    log("reload has active");
     return Scaffold(
       body: SafeArea(
         child: Background(
@@ -69,33 +70,27 @@ class _HomeScreenState extends State<HomeScreen>
                               const SizedBox(
                                 width: 3,
                               ),
-                              DropdownButton<String>(
-                                value: selectedValue,
-                                underline: const SizedBox(),
-                                style: const TextStyle(
-                                    fontSize: 14, color: Colors.black),
-                                items: const [
-                                  DropdownMenuItem(
-                                    value: "INK0001",
-                                    child: Text("INK0001"),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: "INK0002",
-                                    child: Text("INK0002"),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: "INK0003",
-                                    child: Text("INK0003"),
-                                  ),
-                                  DropdownMenuItem(
-                                    value: "INK0004",
-                                    child: Text("INK0004"),
-                                  ),
-                                ],
-                                onChanged: (newValue) {
-                                  setState(() {
-                                    selectedValue = newValue!;
-                                  });
+                              BlocBuilder<HomeBloc, HomeState>(
+                                buildWhen: (previous, current) =>
+                                    previous != current &&
+                                    current is UpdateInkubatorList,
+                                builder: (context, state) {
+                                  if (state is UpdateInkubatorList) {
+                                    selectedValue = state.id[0];
+                                    return DropdownButton<String>(
+                                      value: selectedValue,
+                                      underline: const SizedBox(),
+                                      style: const TextStyle(
+                                          fontSize: 14, color: Colors.black),
+                                      items: state.id
+                                          .map((e) => DropdownMenuItem(
+                                              value: e, child: Text(e)))
+                                          .toList(),
+                                      onChanged: (newValue) {
+                                      },
+                                    );
+                                  }
+                                  return const Text("loading");
                                 },
                               )
                             ],

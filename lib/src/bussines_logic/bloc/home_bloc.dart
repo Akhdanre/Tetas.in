@@ -109,14 +109,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   inkubatorId() async {
-    http.Response response = await getProgress("INK0004");
+    http.Response response = await getInkubator();
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
-      add(DataInkubatorRequest(id: data["data"]));
+      List<String> id = (data["data"] as List).map((e) => e as String).toList();
+      add(DataInkubatorRequest(id: id));
     }
   }
 
-  Future<http.Response> getInkubator(String id) async {
+  Future<http.Response> getInkubator() async {
     Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/inku");
     String token = await UserData().getToken();
     var response = await http.get(
