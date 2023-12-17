@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:tetas_in/config/base_url.dart';
+import 'package:tetas_in/src/utils/shared_preferences/inku_data.dart';
 import 'package:tetas_in/src/utils/shared_preferences/user_data.dart';
 import 'dart:convert';
 
@@ -97,6 +98,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     http.Response response = await getProgress("INK0004");
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
+      InkuData().progress = data["data"];
       add(DataProgressRequest(day: data["data"]));
     }
   }
