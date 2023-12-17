@@ -20,7 +20,9 @@ class _HomeScreenState extends State<HomeScreen>
   String user = "akhdanre";
   String idIncubator = "IND00004";
   String dueDate = "12-12-2023";
-  String selectedValue = "INK0001"; // Initialize with a default value
+  String selectedValue = "INK0001";
+
+
 
   @override
   Widget build(BuildContext context) {
