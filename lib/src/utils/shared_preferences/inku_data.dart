@@ -1,19 +1,15 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 class InkuData {
-  late final SharedPreferences pref;
-  InkuData() {
-    initShared();
+  final Future<SharedPreferences> pref = SharedPreferences.getInstance();
+
+  Future<void> setProgress(int day) async {
+    final SharedPreferences prefs = await pref;
+    await prefs.setInt("day", day);
   }
 
-  initShared() async {
-    pref = await SharedPreferences.getInstance();
+  Future<int> get day async {
+    final SharedPreferences prefs = await pref;
+    return prefs.getInt("day") ?? 1;
   }
-
-  set progress(int day) {
-    pref.setInt("day", day);
-  }
-
-  Future<int> get day async => pref.getInt("day") ?? 1;
-  
 }

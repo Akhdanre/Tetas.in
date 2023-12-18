@@ -98,7 +98,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     http.Response response = await getProgress("INK0004");
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
-      InkuData().progress = data["data"];
+      InkuData().setProgress(data["data"]);
       add(DataProgressRequest(day: data["data"]));
     }
   }

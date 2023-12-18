@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tetas_in/src/bussines_logic/bloc/evolution_bloc.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
@@ -11,6 +13,7 @@ class EvolutionScreen extends StatefulWidget {
 }
 
 class _EvolutionScreenState extends State<EvolutionScreen> {
+  final ScrollController scrollController = ScrollController();
   int day = 15;
   String dueDate = "12-12-2023";
   String description =
@@ -38,32 +41,68 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                 SizedBox(
                   height: 60,
                   width: screen.widht,
-                  child: ListView.builder(
-                    shrinkWrap: true,
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 21,
-                    itemBuilder: (context, index) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                          color: index == 0 || index == 14
-                              ? yellowString
-                              : Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.5),
-                              spreadRadius: 1,
-                              blurRadius: 4,
-                              offset: const Offset(2, 5),
-                            )
-                          ],
-                          shape: BoxShape.circle,
+                  child: BlocBuilder<EvolutionBloc, EvolutionState>(
+                    builder: (context, state) {
+                      if (state is EvolutioanProgress) {
+                        if (scrollController.hasClients) {
+                          scrollController.jumpTo(state.day.toDouble());
+                        }
+
+                        return ListView.builder(
+                          controller: scrollController,
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 21,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              decoration: BoxDecoration(
+                                color: index == (state.day - 1)
+                                    ? yellowString
+                                    : Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 4,
+                                    offset: const Offset(2, 5),
+                                  )
+                                ],
+                                shape: BoxShape.circle,
+                              ),
+                              child: Center(child: Text("${index + 1}")),
+                            ),
+                          ),
+                        );
+                      }
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 21,
+                        itemBuilder: (context, index) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Container(
+                            height: 40,
+                            width: 40,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 1,
+                                  blurRadius: 4,
+                                  offset: const Offset(2, 5),
+                                )
+                              ],
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(child: Text("${index + 1}")),
+                          ),
                         ),
-                        child: Center(child: Text("${index + 1}")),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(
@@ -85,18 +124,42 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Align(child: Image.asset("Assets/Telur/15.jpg")),
-                        Text("Day $day",
-                            style: const TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.bold)),
-                        Text(
-                          "Due date : $dueDate",
-                          style: const TextStyle(fontWeight: FontWeight.w300),
-                        )
-                      ],
+                    child: BlocBuilder<EvolutionBloc, EvolutionState>(
+                      builder: (context, state) {
+                        if (state is EvolutioanProgress) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Align(
+                                  child: Image.asset(
+                                      "Assets/Telur/${state.day}.jpg")),
+                              Text("Day ${state.day}",
+                                  style: const TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold)),
+                              Text(
+                                "Due date : $dueDate",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.w300),
+                              )
+                            ],
+                          );
+                        }
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Align(child: Image.asset("Assets/Telur/${1}.jpg")),
+                            const Text("Day 1",
+                                style: TextStyle(
+                                    fontSize: 25, fontWeight: FontWeight.bold)),
+                            Text(
+                              "Due date : $dueDate",
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w300),
+                            )
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ),
