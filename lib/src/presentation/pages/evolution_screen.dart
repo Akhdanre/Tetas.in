@@ -14,8 +14,8 @@ class EvolutionScreen extends StatefulWidget {
 
 class _EvolutionScreenState extends State<EvolutionScreen> {
   final ScrollController scrollController = ScrollController();
-  int day = 15;
   String dueDate = "12-12-2023";
+  late int dayProgress;
   String description =
       "Pada hari ke-15 penetasan telur, perkembangan embrio telah mencapai tahap yang lebih maju. Zigot yang telah mengalami serangkaian pembelahan sel membentuk struktur yang disebut blastula, dengan sel-sel yang mengalami diferensiasi";
 
@@ -42,23 +42,62 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                   height: 60,
                   width: screen.widht,
                   child: BlocBuilder<EvolutionBloc, EvolutionState>(
+                    buildWhen: (previous, current) =>
+                        previous != current && current is EvolutioanProgress,
                     builder: (context, state) {
                       if (state is EvolutioanProgress) {
                         if (scrollController.hasClients) {
                           scrollController.jumpTo(state.day.toDouble());
                         }
+                        dayProgress = state.day - 1;
                         return ListView.builder(
                           controller: scrollController,
                           shrinkWrap: true,
                           scrollDirection: Axis.horizontal,
-                          itemCount: 21,
+                          itemCount: 20,
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: GestureDetector(
+                              onTap: () {
+                                context
+                                    .read<EvolutionBloc>()
+                                    .evolutionProgress(index + 1);
+                              },
+                              child: Container(
+                                height: 40,
+                                width: 40,
+                                decoration: BoxDecoration(
+                                  color: index == (state.day - 1)
+                                      ? yellowString
+                                      : Colors.white,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 1,
+                                      blurRadius: 4,
+                                      offset: const Offset(2, 5),
+                                    )
+                                  ],
+                                  shape: BoxShape.circle,
+                                ),
+                                child: Center(child: Text("${index + 1}")),
+                              ),
+                            ),
+                          ),
+                        );
+                      }
+                      if (state is EvolutionProgressSwitch) {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 20,
                           itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: Container(
                               height: 40,
                               width: 40,
                               decoration: BoxDecoration(
-                                color: index == (state.day - 1)
+                                color: index == state.day
                                     ? yellowString
                                     : Colors.white,
                                 boxShadow: [
@@ -79,7 +118,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                       return ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.horizontal,
-                        itemCount: 21,
+                        itemCount: 20,
                         itemBuilder: (context, index) => Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           child: Container(
@@ -108,6 +147,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                   height: 20,
                 ),
                 Container(
+                  height: 379,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
@@ -125,22 +165,55 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                         horizontal: 20, vertical: 10),
                     child: BlocBuilder<EvolutionBloc, EvolutionState>(
                       builder: (context, state) {
-                        if (state is EvolutioanProgress) {
+                        if (state is EvolutioanProgress && state.day != 0) {
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Align(
                                   child: Image.asset(
                                       "Assets/Telur/${state.day}.jpg")),
-                              Text("Day ${state.day}",
-                                  style: const TextStyle(
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.bold)),
-                              Text(
-                                "Due date : $dueDate",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w300),
-                              )
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Day ${state.day}",
+                                    style: const TextStyle(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Text(
+                                    "Due date : $dueDate",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w300),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          );
+                        }
+
+                        if (state is EvolutionProgressSwitch) {
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Align(
+                                  child: Image.asset(
+                                      "Assets/Telur/${state.day}.jpg")),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Day ${state.day}",
+                                      style: const TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.bold)),
+                                  Text(
+                                    "Due date : $dueDate",
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.w300),
+                                  )
+                                ],
+                              ),
                             ],
                           );
                         }

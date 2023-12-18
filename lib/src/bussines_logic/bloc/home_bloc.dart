@@ -104,6 +104,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       InkuData().setProgress(data["data"]);
       add(DataProgressRequest(day: data["data"]));
     }
+    if (response.statusCode == 401) {
+      InkuData().setProgress(0);
+    }
+  }
+
+  changeDayDescription() {
+    
   }
 
   Future<http.Response> getProgress(String id) async {

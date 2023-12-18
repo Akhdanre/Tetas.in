@@ -10,11 +10,19 @@ class EvolutionBloc extends Bloc<EvolutionEvent, EvolutionState> {
       emit(EvolutioanProgress(day: event.day));
     });
 
+    on<EvolutionProgressSwitchEvent>((event, emit) {
+      emit(EvolutionProgressSwitch(day: event.day));
+    });
+
     getEvolutionProgress();
   }
 
   getEvolutionProgress() async {
     int day = await InkuData().day;
     add(EvolutionProgressEvent(day: day));
+  }
+
+  evolutionProgress(int day) async {
+    add(EvolutionProgressSwitchEvent(day: day));
   }
 }

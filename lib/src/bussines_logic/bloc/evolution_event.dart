@@ -7,3 +7,9 @@ final class EvolutionProgressEvent extends EvolutionEvent {
 
   EvolutionProgressEvent({required this.day});
 }
+
+final class EvolutionProgressSwitchEvent extends EvolutionEvent {
+  int day;
+
+  EvolutionProgressSwitchEvent({required this.day});
+}

@@ -9,3 +9,9 @@ final class EvolutioanProgress extends EvolutionState {
 
   EvolutioanProgress({required this.day});
 }
+
+final class EvolutionProgressSwitch extends EvolutionState {
+  int day;
+
+  EvolutionProgressSwitch({required this.day});
+}
