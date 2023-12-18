@@ -30,6 +30,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     dataListInku();
+    context.read<HomeBloc>().getProgress(selectedValue);
     super.initState();
   }
 

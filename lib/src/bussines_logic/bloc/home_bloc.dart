@@ -16,11 +16,11 @@ part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   late WebSocketChannel _webSocketChannel;
+  late String inkuid;
 
   HomeBloc() : super(HomeInitial()) {
     inkubatorId();
     _connectToWebSocket();
-    progressDay();
 
     on<UpdateDataRequest>(
       (event, emit) {
@@ -39,7 +39,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     );
 
     on<DataInkubatorRequest>(
-      (event, emit) => emit(UpdateInkubatorList(id: event.id)),
+      (event, emit) {
+        progressDay(inkuid);
+        emit(UpdateInkubatorList(id: event.id));
+      },
     );
 
     on<DataInkubatorSwitch>(
@@ -94,8 +97,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     add(UpdateDataRequest(temp: temp, humd: humd, water: water));
   }
 
-  progressDay() async {
-    http.Response response = await getProgress("INK0004");
+  progressDay(String id) async {
+    http.Response response = await getProgress(id);
     if (response.statusCode == 200) {
       var data = jsonDecode(response.body);
       InkuData().setProgress(data["data"]);
@@ -120,6 +123,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       var data = jsonDecode(response.body);
       List<String> id = (data["data"] as List).map((e) => e as String).toList();
       UserData().setInkubator(id);
+      inkuid = id[0];
       add(DataInkubatorRequest(id: id));
     }
   }

@@ -97,7 +97,6 @@ class _HistoryScreenState extends State<HistoryScreen> {
                         BlocBuilder<HistoryBloc, HistoryState>(
                           builder: (context, state) {
                             if (state is HistoryData) {
-                              print(state.data);
                               return ListView.builder(
                                 shrinkWrap: true,
                                 itemCount: state.data.length,

@@ -47,7 +47,6 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                         if (scrollController.hasClients) {
                           scrollController.jumpTo(state.day.toDouble());
                         }
-
                         return ListView.builder(
                           controller: scrollController,
                           shrinkWrap: true,

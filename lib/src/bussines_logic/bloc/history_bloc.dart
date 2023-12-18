@@ -10,11 +10,10 @@ part 'history_state.dart';
 
 class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
   HistoryBloc() : super(HistoryInitial()) {
+    getDataHistory();
     on<HistoryDataEvent>((event, emit) {
       emit(HistoryData(data: event.data));
     });
-
-    getDataHistory();
   }
 
   void getDataHistory() async {
@@ -35,4 +34,9 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
 
     return response;
   }
+
+  // @override
+  // Future<void> close() {
+  //   return super.close();
+  // }
 }
