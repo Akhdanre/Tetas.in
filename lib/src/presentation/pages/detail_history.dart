@@ -118,6 +118,58 @@ class _DetailHistoryState extends State<DetailHistory> {
                 ],
               ),
             ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+                margin: const EdgeInsets.all(20),
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 4,
+                      offset: const Offset(1.5, 5),
+                    ),
+                  ],
+                  color: baseColorBg,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      const Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Day"),
+                          Text("Temperature"),
+                          Text("Humadity"),
+                        ],
+                      ),
+                      ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: 5,
+                          itemBuilder: (context, index) => Column(children: [
+                                const Divider(
+                                  color: Colors.black,
+                                  height: 20,
+                                  thickness: 2,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text("1"),
+                                    Text("1"),
+                                    Text("1"),
+                                  ],
+                                ),
+                              ]))
+                    ],
+                  ),
+                ))
           ])),
     )));
   }
