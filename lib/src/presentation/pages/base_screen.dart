@@ -8,6 +8,7 @@ import 'package:tetas_in/src/presentation/pages/controller_screen.dart';
 import 'package:tetas_in/src/presentation/pages/evolution_screen.dart';
 import 'package:tetas_in/src/presentation/pages/history_screen.dart';
 import 'package:tetas_in/src/presentation/pages/home_screen.dart';
+import 'package:tetas_in/src/utils/color_string.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
@@ -42,6 +43,7 @@ class _BaseScreenState extends State<BaseScreen> {
   void changePage(index) {
     pageController.jumpToPage(index);
     selectedIndex = index;
+    setState(() {});
   }
 
   @override
@@ -74,7 +76,8 @@ class _BaseScreenState extends State<BaseScreen> {
           ),
           bottomNavigationBar: BottomNavigationBar(
               type: BottomNavigationBarType.fixed,
-              selectedItemColor: Colors.black,
+              selectedItemColor: orangeString,
+              unselectedItemColor: orangeString2,
               currentIndex: selectedIndex,
               onTap: changePage,
               items: const [

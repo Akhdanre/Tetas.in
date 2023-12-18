@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tetas_in/src/bussines_logic/bloc/home_bloc.dart';
@@ -45,7 +43,6 @@ class _HomeScreenState extends State<HomeScreen>
   Widget build(BuildContext context) {
     super.build(context);
     SizeConfig screen = SizeConfig(context);
-    log("reload has active");
     return Scaffold(
       body: SafeArea(
         child: Background(

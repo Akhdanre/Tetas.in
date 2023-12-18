@@ -31,7 +31,6 @@ class HistoryBloc extends Bloc<HistoryEvent, HistoryState> {
       url,
       headers: {"Content-Type": 'application/json', "X-API-TOKEN": token},
     );
-
     return response;
   }
 
