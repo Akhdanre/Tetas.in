@@ -112,8 +112,16 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                       onTap: () => Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                const DetailHistory()),
+                                            builder: (context) => DetailHistory(
+                                                  id: state.data[index].id
+                                                      .toString(),
+                                                  date: state
+                                                      .data[index].startData,
+                                                  dataTarget: state.data[index]
+                                                      .endDataEstimation,
+                                                  numEgs: state
+                                                      .data[index].numberOfEgg,
+                                                )),
                                       ),
                                       child: Row(
                                         mainAxisAlignment:
