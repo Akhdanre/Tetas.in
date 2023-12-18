@@ -314,7 +314,6 @@ class _ControllerScreenState extends State<ControllerScreen> {
                                     break;
                                 }
                               }
-
                               return Text(
                                 description2,
                                 textAlign: TextAlign.justify,

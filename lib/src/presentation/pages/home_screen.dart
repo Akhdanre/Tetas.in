@@ -328,7 +328,7 @@ class _HomeScreenState extends State<HomeScreen>
                                     return Stack(
                                       children: [
                                         Slider(
-                                            max: 21,
+                                            max: 20,
                                             value: state.day.toDouble(),
                                             inactiveColor:
                                                 grayTransparentString,
@@ -348,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen>
                                   return Stack(
                                     children: [
                                       Slider(
-                                          max: 21,
+                                          max: 20,
                                           value: 1,
                                           inactiveColor: grayTransparentString,
                                           onChanged: (value) {}),
@@ -356,7 +356,7 @@ class _HomeScreenState extends State<HomeScreen>
                                         padding: EdgeInsets.symmetric(
                                             vertical: 16, horizontal: 40),
                                         child: Text(
-                                          "12%",
+                                          "0%",
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold),
                                         ),
