@@ -5,7 +5,7 @@ Data dataFromJson(String str) => Data.fromJson(json.decode(str));
 String dataToJson(Data data) => json.encode(data.toJson());
 
 class Data {
-  List<Datum> data;
+  List<DetailHatchModel> data;
   dynamic errors;
 
   Data({
@@ -14,7 +14,8 @@ class Data {
   });
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
-        data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+        data: List<DetailHatchModel>.from(
+            json["data"].map((x) => DetailHatchModel.fromJson(x))),
         errors: json["errors"],
       );
 
@@ -24,7 +25,7 @@ class Data {
       };
 }
 
-class Datum {
+class DetailHatchModel {
   int id;
   int idHatchData;
   int temp;
@@ -33,7 +34,7 @@ class Datum {
   String time;
   DateTime date;
 
-  Datum({
+  DetailHatchModel({
     required this.id,
     required this.idHatchData,
     required this.temp,
@@ -43,7 +44,8 @@ class Datum {
     required this.date,
   });
 
-  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
+  factory DetailHatchModel.fromJson(Map<String, dynamic> json) =>
+      DetailHatchModel(
         id: json["id"],
         idHatchData: json["id_hatch_data"],
         temp: json["temp"],
