@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tetas_in/src/bussines_logic/bloc/detail_history_bloc.dart';
 import 'package:tetas_in/src/bussines_logic/bloc/history_bloc.dart';
 import 'package:tetas_in/src/presentation/pages/detail_history.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
@@ -112,15 +113,19 @@ class _HistoryScreenState extends State<HistoryScreen> {
                                       onTap: () => Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) => DetailHistory(
-                                                  id: state.data[index].id
-                                                      .toString(),
-                                                  date: state
-                                                      .data[index].startData,
-                                                  dataTarget: state.data[index]
-                                                      .endDataEstimation,
-                                                  numEgs: state
-                                                      .data[index].numberOfEgg,
+                                            builder: (context) => BlocProvider(
+                                                  create: (context) =>
+                                                      DetailHistoryBloc(),
+                                                  child: DetailHistory(
+                                                    id: state.data[index].id,
+                                                    date: state
+                                                        .data[index].startData,
+                                                    dataTarget: state
+                                                        .data[index]
+                                                        .endDataEstimation,
+                                                    numEgs: state.data[index]
+                                                        .numberOfEgg,
+                                                  ),
                                                 )),
                                       ),
                                       child: Row(
