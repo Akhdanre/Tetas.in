@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tetas_in/src/bussines_logic/bloc/history_bloc.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
@@ -92,27 +94,36 @@ class _HistoryScreenState extends State<HistoryScreen> {
                             Text("Token"),
                           ],
                         ),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: 0,
-                          itemBuilder: (context, index) => const Column(
-                            children: [
-                              Divider(
-                                color: Colors.black,
-                                height: 20,
-                                thickness: 2,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text("8/12/2023"),
-                                  Text("INK0004"),
-                                  Text("ikbclzpeyk"),
-                                ],
-                              ),
-                            ],
-                          ),
+                        BlocBuilder<HistoryBloc, HistoryState>(
+                          builder: (context, state) {
+                            if (state is HistoryData) {
+                              print(state.data);
+                              return ListView.builder(
+                                shrinkWrap: true,
+                                itemCount: state.data.length,
+                                itemBuilder: (context, index) => const Column(
+                                  children: [
+                                    Divider(
+                                      color: Colors.black,
+                                      height: 20,
+                                      thickness: 2,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text("8/12/2023"),
+                                        Text("INK0004"),
+                                        Text("ikbclzpeyk"),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                            return const Center(
+                                child: Text("belum memulai penetasan"));
+                          },
                         ),
                       ],
                     ),
