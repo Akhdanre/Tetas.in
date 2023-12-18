@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tetas_in/src/bussines_logic/bloc/history_bloc.dart';
+import 'package:tetas_in/src/presentation/pages/detail_history.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
@@ -91,7 +92,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                           children: [
                             Text("Start Date"),
                             Text("ID Incubator"),
-                            Text("Token"),
+                            Text("Num Egg"),
                           ],
                         ),
                         BlocBuilder<HistoryBloc, HistoryState>(
@@ -100,21 +101,30 @@ class _HistoryScreenState extends State<HistoryScreen> {
                               return ListView.builder(
                                 shrinkWrap: true,
                                 itemCount: state.data.length,
-                                itemBuilder: (context, index) => const Column(
+                                itemBuilder: (context, index) => Column(
                                   children: [
-                                    Divider(
+                                    const Divider(
                                       color: Colors.black,
                                       height: 20,
                                       thickness: 2,
                                     ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text("8/12/2023"),
-                                        Text("INK0004"),
-                                        Text("ikbclzpeyk"),
-                                      ],
+                                    GestureDetector(
+                                      onTap: () => Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const DetailHistory()),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(state.data[index].startData),
+                                          Text(state.data[index].id.toString()),
+                                          Text(state.data[index].numberOfEgg
+                                              .toString()),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),

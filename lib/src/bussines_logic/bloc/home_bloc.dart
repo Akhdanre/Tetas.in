@@ -109,9 +109,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     }
   }
 
-  changeDayDescription() {
-    
-  }
+  changeDayDescription() {}
 
   Future<http.Response> getProgress(String id) async {
     Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/progress/$id");
@@ -142,7 +140,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       url,
       headers: {"Content-Type": 'application/json', "X-API-TOKEN": token},
     );
-
     return response;
   }
 
