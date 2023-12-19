@@ -32,9 +32,13 @@ Future<void> initSse() async {
     },
   ).listen(
     (event) {
-      log("event.data");
-      // var data = jsonDecode(event.data!);
-      showNotification("Tetasin", "telur menetas");
+      try {
+        var data = event.data.toString();
+        log(data);
+        showNotification("Tetasin", "telur menetas");
+      } catch (e) {
+        print("Error decoding JSON: $e");
+      }
     },
   );
 }
