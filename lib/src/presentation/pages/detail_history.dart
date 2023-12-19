@@ -176,8 +176,8 @@ class _DetailHistoryState extends State<DetailHistory> {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Text(state.data[index].id
-                                                .toString()),
+                                            Text(
+                                                "${state.data[index].date.day}-${state.data[index].date.month}-${state.data[index].date.year}"),
                                             Text(state.data[index].temp
                                                 .toString()),
                                             Text(state.data[index].humd
