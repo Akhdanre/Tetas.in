@@ -40,15 +40,15 @@ class _StartInkuPageState extends State<StartInkuPage> {
                     TextFieldCustomAll(
                         title: "Start Date",
                         textHint: "02/08/2023",
-                        controller: idInku),
+                        controller: startData),
                     TextFieldCustomAll(
                         title: "Hatch Estimation",
-                        textHint: "02/08/2023",
+                        textHint: "23/08/2023",
                         controller: idInku),
                     TextFieldCustomAll(
                         title: "Number Of Eggs",
-                        textHint: "INK0001",
-                        controller: idInku),
+                        textHint: "12",
+                        controller: numberofegg),
                     const Spacer(),
                     ElevatedButton(
                         onPressed: () {},

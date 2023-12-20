@@ -4,6 +4,7 @@ import 'package:tetas_in/src/bussines_logic/bloc/evolution_bloc.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class EvolutionScreen extends StatefulWidget {
   const EvolutionScreen({super.key});
@@ -16,8 +17,7 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
   final ScrollController scrollController = ScrollController();
   String dueDate = "12-12-2023";
   late int dayProgress;
-  String description =
-      "Pada hari ke-15 penetasan telur, perkembangan embrio telah mencapai tahap yang lebih maju. Zigot yang telah mengalami serangkaian pembelahan sel membentuk struktur yang disebut blastula, dengan sel-sel yang mengalami diferensiasi";
+  late String description1;
 
   @override
   Widget build(BuildContext context) {
@@ -263,9 +263,60 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          description,
-                          textAlign: TextAlign.justify,
+                        BlocBuilder<EvolutionBloc, EvolutionState>(
+                          builder: (context, state) {
+                            if (state is EvolutioanProgress && state.day != 0) {
+                              if (state.day <= 2) {
+                                description1 = AppLocalizations.of(context)
+                                    .day_progress_1_2;
+                              } else if (state.day <= 3) {
+                                description1 =
+                                    AppLocalizations.of(context).day_progress_3;
+                              } else if (state.day <= 5) {
+                                description1 = AppLocalizations.of(context)
+                                    .day_progress_4_5;
+                              } else if (state.day <= 9) {
+                                description1 = AppLocalizations.of(context)
+                                    .day_progress_6_9;
+                              } else if (state.day <= 15) {
+                                description1 = AppLocalizations.of(context)
+                                    .day_progress_10_14;
+                              } else if (state.day <= 20) {
+                                description1 = AppLocalizations.of(context)
+                                    .day_progress_16_20;
+                              }
+                            }
+                            if (state is EvolutionProgressSwitch &&
+                                state.day != 0) {
+                              if (state.day <= 2) {
+                                description1 = AppLocalizations.of(context)
+                                    .day_progress_1_2;
+                              } else if (state.day <= 3) {
+                                description1 =
+                                    AppLocalizations.of(context).day_progress_3;
+                              } else if (state.day <= 5) {
+                                description1 = AppLocalizations.of(context)
+                                    .day_progress_4_5;
+                              } else if (state.day <= 9) {
+                                description1 = AppLocalizations.of(context)
+                                    .day_progress_6_9;
+                              } else if (state.day <= 15) {
+                                description1 = AppLocalizations.of(context)
+                                    .day_progress_10_14;
+                              } else if (state.day <= 20) {
+                                description1 = AppLocalizations.of(context)
+                                    .day_progress_16_20;
+                              }
+                              return Text(
+                                description1,
+                                textAlign: TextAlign.justify,
+                              );
+                            }
+                            return Text(
+                              AppLocalizations.of(context).day_progress_1_2,
+                              textAlign: TextAlign.justify,
+                            );
+                          },
                         ),
                       ],
                     ),

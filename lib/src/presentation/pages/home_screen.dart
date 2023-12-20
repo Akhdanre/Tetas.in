@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>
     with AutomaticKeepAliveClientMixin {
-  String user = "akhdanre";
+  String user = "";
   String idIncubator = "IND00004";
   String dueDate = "12-12-2023";
   String selectedValue = "INK0001";
@@ -28,8 +28,14 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   void initState() {
     dataListInku();
+    getDataUser();
     context.read<HomeBloc>().getProgress(selectedValue);
     super.initState();
+  }
+
+  void getDataUser() async {
+    user = await UserData().name;
+    setState(() {});
   }
 
   void dataListInku() async {

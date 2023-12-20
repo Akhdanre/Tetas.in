@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_client_sse/constants/sse_request_type_enum.dart';
@@ -55,7 +54,7 @@ Future<void> showNotification(String title, String body) async {
       NotificationDetails(android: androidPlatformChannelSpecifics);
 
   await flutterLocalNotificationsPlugin.show(
-    0, // Notification ID
+    0,
     title,
     body,
     platformChannelSpecifics,

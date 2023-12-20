@@ -17,7 +17,7 @@ class AuthCubit extends Cubit<AuthState> {
     try {
       emit(AuthLoading());
 
-      if (username.length >= 7 && password.length >= 8) {
+      if (username.length >= 7 && password.length >= 7) {
         final data = await loginRequest(
             LoginRequest(username: username, password: password));
         var jsonData = jsonDecode(data);
