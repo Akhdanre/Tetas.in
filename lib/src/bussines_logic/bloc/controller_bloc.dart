@@ -8,6 +8,7 @@ import 'package:web_socket_channel/io.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 part 'controller_event.dart';
+
 part 'controller_state.dart';
 
 class ControllerBloc extends Bloc<ControllerEvent, ControllerState> {

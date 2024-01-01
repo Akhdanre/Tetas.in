@@ -85,6 +85,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         log('WebSocket error: $error');
       },
       onDone: () {
+        Future.delayed(const Duration(seconds: 3));
         _connectToWebSocket();
       },
     );

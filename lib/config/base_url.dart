@@ -1,5 +1,5 @@
 class BaseUrl {
-  static String host = "172.16.106.124";
+  static String host = "10.10.10.251";
   static int port = 8000;
   static List<String> type = ["api", "ws"];
 
