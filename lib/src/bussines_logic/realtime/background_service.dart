@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter_client_sse/constants/sse_request_type_enum.dart';
@@ -13,7 +14,7 @@ Future<void> initSse() async {
   const AndroidInitializationSettings initializationSettingsAndroid =
       AndroidInitializationSettings("@mipmap/ic_launcher");
 
-  final InitializationSettings initializationSettings = InitializationSettings(
+  const InitializationSettings initializationSettings = InitializationSettings(
     android: initializationSettingsAndroid,
   );
 
@@ -32,9 +33,10 @@ Future<void> initSse() async {
   ).listen(
     (event) {
       try {
-        var data = event.data.toString();
-        log(data);
-        showNotification("Tetasin", "telur menetas");
+        var json = jsonDecode(event.data!);
+        if(json["data"] != null){
+            showNotification("Pemberitahuan", json["data"]["message"]);
+        }
       } catch (e) {
         print("Error decoding JSON: $e");
       }
