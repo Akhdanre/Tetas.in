@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tetas_in/src/bussines_logic/bloc/home_bloc.dart';
+import 'package:tetas_in/src/bussines_logic/cubit/start_inku_cubit.dart';
 import 'package:tetas_in/src/presentation/pages/setting_screen.dart';
 import 'package:tetas_in/src/presentation/pages/start_inku_screen.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
@@ -208,10 +209,14 @@ class _HomeScreenState extends State<HomeScreen>
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const StartInkuPage(),
-                                  ));
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        BlocProvider<StartInkuCubit>(
+                                          create: (context) => StartInkuCubit()..initCubit(),
+                                          child: const StartInkuPage(),
+                                        )),
+                              );
                             },
                             child: Padding(
                               padding: const EdgeInsets.symmetric(

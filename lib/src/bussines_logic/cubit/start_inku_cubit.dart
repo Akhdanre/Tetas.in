@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart' as http;
 import 'package:tetas_in/config/base_url.dart';
+import 'package:tetas_in/src/utils/shared_preferences/user_data.dart';
 
 part 'start_inku_state.dart';
 
@@ -15,6 +16,17 @@ class StartInkuCubit extends Cubit<StartInkuState> {
       log("error : $e");
     }
   }
+
+
+  initCubit(){
+    getValue();
+  }
+
+  getValue() async {
+    var data =  await UserData().inkubator;
+    emit(UpdateIdInku(listInkubators: data));
+  }
+
 
   Future<String> startreq(String id, String date, int number) async {
     Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/authentication");

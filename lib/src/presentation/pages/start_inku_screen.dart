@@ -6,7 +6,6 @@ import 'package:tetas_in/src/presentation/widgets/text_field_custom_all.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 
-import '../../utils/shared_preferences/user_data.dart';
 
 class StartInkuPage extends StatefulWidget {
   const StartInkuPage({super.key});
@@ -19,23 +18,17 @@ class _StartInkuPageState extends State<StartInkuPage> {
   TextEditingController idInku = TextEditingController();
   TextEditingController startData = TextEditingController();
   TextEditingController numberOfEgg = TextEditingController();
-  late List<String> listInku;
-  String selectedValue = "INK0001";
 
   @override
   void initState() {
     super.initState();
-    dataInku();
   }
 
-  Future<void> dataInku() async {
-    listInku = await UserData().inkubator;
-  }
 
   @override
   Widget build(BuildContext context) {
     SizeConfig screen = SizeConfig(context);
-    return Scaffold(
+    return  Scaffold(
       body: SafeArea(
           child: Background(
               screen: screen,
@@ -50,22 +43,22 @@ class _StartInkuPageState extends State<StartInkuPage> {
                     ),
                     BlocBuilder(
                       builder: (context, state) {
-                        if (1 == 1) {
-                          return DropdownButton<String>(
-                            value: selectedValue,
-                            underline: const SizedBox(),
-                            style: const TextStyle(
-                                fontSize: 14, color: Colors.black),
-                            items: listInku
-                                .map((e) =>
-                                    DropdownMenuItem(value: e, child: Text(e)))
-                                .toList(),
-                            onChanged: (newValue) {
-                              // context.read<HomeBloc>().add(
-                              //     DataInkubatorSwitch(id: newValue!));
-                            },
-                          );
-                        }
+                        // if (1 == 1) {
+                        //   return DropdownButton<String>(
+                        //     value: "super",
+                        //     underline: const SizedBox(),
+                        //     style: const TextStyle(
+                        //         fontSize: 14, color: Colors.black),
+                        //     items: listInku
+                        //         .map((e) =>
+                        //             DropdownMenuItem(value: e, child: Text(e)))
+                        //         .toList(),
+                        //     onChanged: (newValue) {
+                        //       // context.read<HomeBloc>().add(
+                        //       //     DataInkubatorSwitch(id: newValue!));
+                        //     },
+                        //   );
+                        // }
                         return TextFieldCustomAll(
                             title: "Start Date",
                             textHint: "02/08/2023",
