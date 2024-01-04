@@ -22,41 +22,42 @@ Future<void> initSse() async {
   await flutterLocalNotificationsPlugin.initialize(
     initializationSettings,
   );
+  subscribeSSE();
+}
 
-  void subscribeSSE() async {
-    String token = await UserData().token;
-    Stream value = SSEClient.subscribeToSSE(
-      method: SSERequestType.GET,
-      url: "http://${BaseUrl.host}:8000/sse/oukenze/$token",
-      header: {
-        "Accept": "text/event-stream",
-        "Cache-Control": "no-cache",
-      },
-    );
+void subscribeSSE() async {
+  String token = await UserData().token;
+  Stream value = SSEClient.subscribeToSSE(
+    method: SSERequestType.GET,
+    url: "http://${BaseUrl.host}:8000/sse/oukenze/$token",
+    header: {
+      "Accept": "text/event-stream",
+      "Cache-Control": "no-cache",
+    },
+  );
 
-    value.listen(
-      (event) {
-        try {
-          var json = jsonDecode(event.data!);
-          if (json["data"] != null) {
-            showNotification("Pemberitahuan", json["data"]["message"]);
-          }
-        } catch (e) {
-          throw Exception(e);
+  value.listen(
+        (event) {
+      try {
+        var json = jsonDecode(event.data!);
+        if (json["data"] != null) {
+          showNotification("Pemberitahuan", json["data"]["message"]);
         }
-      },
-      onDone: () {
-        log("sse Done");
-        Future.delayed(const Duration(seconds: 5));
-        subscribeSSE();
-      },
-      onError: (err) {
-        Future.delayed(const Duration(seconds: 5));
-        log("sse on error with exception : $err");
-        subscribeSSE();
-      },
-    );
-  }
+      } catch (e) {
+        throw Exception(e);
+      }
+    },
+    onDone: () {
+      log("sse Done");
+      Future.delayed(const Duration(seconds: 5));
+      subscribeSSE();
+    },
+    onError: (err) {
+      Future.delayed(const Duration(seconds: 5));
+      log("sse on error with exception : $err");
+      subscribeSSE();
+    },
+  );
 }
 
 Future<void> showNotification(String title, String body) async {
