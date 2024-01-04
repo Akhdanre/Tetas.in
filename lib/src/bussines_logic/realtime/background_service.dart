@@ -5,6 +5,7 @@ import 'package:flutter_client_sse/constants/sse_request_type_enum.dart';
 import 'package:flutter_client_sse/flutter_client_sse.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:tetas_in/config/base_url.dart';
+import 'package:tetas_in/src/utils/shared_preferences/user_data.dart';
 // import 'package:tetas_in/src/utils/shared_preferences/user_data.dart';
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -22,26 +23,40 @@ Future<void> initSse() async {
     initializationSettings,
   );
 
-  SSEClient.subscribeToSSE(
-    method: SSERequestType.GET,
-    url:
-        "http://${BaseUrl.host}:8000/sse/oukenze/90d35625-fd55-4f0b-a1ba-101c486527ae",
-    header: {
-      "Accept": "text/event-stream",
-      "Cache-Control": "no-cache",
-    },
-  ).listen(
-    (event) {
-      try {
-        var json = jsonDecode(event.data!);
-        if(json["data"] != null){
+  void subscribeSSE() async {
+    String token = await UserData().token;
+    Stream value = SSEClient.subscribeToSSE(
+      method: SSERequestType.GET,
+      url: "http://${BaseUrl.host}:8000/sse/oukenze/$token",
+      header: {
+        "Accept": "text/event-stream",
+        "Cache-Control": "no-cache",
+      },
+    );
+
+    value.listen(
+      (event) {
+        try {
+          var json = jsonDecode(event.data!);
+          if (json["data"] != null) {
             showNotification("Pemberitahuan", json["data"]["message"]);
+          }
+        } catch (e) {
+          throw Exception(e);
         }
-      } catch (e) {
-        print("Error decoding JSON: $e");
-      }
-    },
-  );
+      },
+      onDone: () {
+        log("sse Done");
+        Future.delayed(const Duration(seconds: 5));
+        subscribeSSE();
+      },
+      onError: (err) {
+        Future.delayed(const Duration(seconds: 5));
+        log("sse on error with exception : $err");
+        subscribeSSE();
+      },
+    );
+  }
 }
 
 Future<void> showNotification(String title, String body) async {
