@@ -35,19 +35,48 @@ class StartInkuPage extends StatelessWidget {
                           previous != current && current is UpdateIdInku,
                       builder: (context, state) {
                         if (state is UpdateIdInku) {
-                          return DropdownButton<String>(
-                            value: "super",
-                            underline: const SizedBox(),
-                            style: const TextStyle(
-                                fontSize: 14, color: Colors.black),
-                            items: state.listInkubators
-                                .map((e) =>
-                                    DropdownMenuItem(value: e, child: Text(e)))
-                                .toList(),
-                            onChanged: (newValue) {
-                              // context.read<StartInkuCubit>().add(
-                              //     Startinku);
-                            },
+                          return Column(
+                            children: [
+                              const Align(
+                                alignment: Alignment.topLeft,
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 5),
+                                  child: Text(
+                                    "ID Inkubator",
+                                    style:
+                                        TextStyle(fontWeight: FontWeight.w500),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 15),
+                                  child: DropdownButton<String>(
+                                    value: state.listInkubators[0],
+                                    isExpanded: true,
+                                    underline: const SizedBox(),
+                                    style: const TextStyle(
+                                        fontSize: 14, color: Colors.black),
+                                    items: state.listInkubators
+                                        .map((e) => DropdownMenuItem(
+                                            value: e, child: Text(e)))
+                                        .toList(),
+                                    onChanged: (newValue) {
+                                      // context.read<StartInkuCubit>().add(
+                                      //     Startinku);
+                                    },
+                                  ),
+                                ),
+                              ),
+                            ],
                           );
                         }
                         return TextFieldCustomAll(

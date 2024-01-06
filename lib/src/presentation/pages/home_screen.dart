@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen>
                               const SizedBox(
                                 width: 5,
                               ),
-                              const Text("ID asap"),
+                              const Text("ID Inkubator"),
                               const SizedBox(
                                 width: 3,
                               ),
@@ -212,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen>
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         BlocProvider(
-                                          create: (context) => StartInkuCubit(),
+                                          create: (context) => StartInkuCubit()..initCubit(),
                                           child: StartInkuPage(),
                                         ))),
                             child: Padding(
