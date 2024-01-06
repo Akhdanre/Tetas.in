@@ -9,7 +9,6 @@ import 'package:tetas_in/src/presentation/pages/controller_screen.dart';
 import 'package:tetas_in/src/presentation/pages/evolution_screen.dart';
 import 'package:tetas_in/src/presentation/pages/history_screen.dart';
 import 'package:tetas_in/src/presentation/pages/home_screen.dart';
-import 'package:tetas_in/src/utils/color_string.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
@@ -44,26 +43,25 @@ class _BaseScreenState extends State<BaseScreen> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => BaseScreenBloc()..onInitBloc(),
-      child: PopScope(
-          canPop: false,
-          onPopInvoked: (bool didPop) async {
-            if (didPop) return;
+      child: WillPopScope(
+          onWillPop: () async {
             return await showDialog(
               context: context,
               builder: (context) => AlertDialog(
-                title: const Text("are you sure want to leave app"),
+                title: const Text("Are you sure you want to leave the app?"),
                 actions: [
                   TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, true);
-                        // Navigator.pop(context);
-                      },
-                      child: const Text("yes")),
+                    onPressed: () {
+                      Navigator.pop(context, true);
+                    },
+                    child: const Text("Yes"),
+                  ),
                   TextButton(
-                      onPressed: () {
-                        Navigator.pop(context, false);
-                      },
-                      child: const Text("no")),
+                    onPressed: () {
+                      Navigator.pop(context, false);
+                    },
+                    child: const Text("No"),
+                  ),
                 ],
               ),
             );
