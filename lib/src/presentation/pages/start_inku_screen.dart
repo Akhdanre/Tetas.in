@@ -1,34 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tetas_in/src/bussines_logic/cubit/start_inku_cubit.dart';
 import 'package:tetas_in/src/presentation/widgets/app_bar_custom.dart';
 import 'package:tetas_in/src/presentation/widgets/background.dart';
 import 'package:tetas_in/src/presentation/widgets/text_field_custom_all.dart';
 import 'package:tetas_in/src/utils/color_string.dart';
 import 'package:tetas_in/src/utils/size_config.dart';
 
+class StartInkuPage extends StatelessWidget {
+  StartInkuPage({super.key});
 
-class StartInkuPage extends StatefulWidget {
-  const StartInkuPage({super.key});
-
-  @override
-  State<StartInkuPage> createState() => _StartInkuPageState();
-}
-
-class _StartInkuPageState extends State<StartInkuPage> {
-  TextEditingController idInku = TextEditingController();
-  TextEditingController startData = TextEditingController();
-  TextEditingController numberOfEgg = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  final TextEditingController idInku = TextEditingController();
+  final TextEditingController startData = TextEditingController();
+  final TextEditingController numberOfEgg = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     SizeConfig screen = SizeConfig(context);
-    return  Scaffold(
+    return Scaffold(
       body: SafeArea(
           child: Background(
               screen: screen,
@@ -41,28 +30,30 @@ class _StartInkuPageState extends State<StartInkuPage> {
                     const SizedBox(
                       height: 30,
                     ),
-                    BlocBuilder(
+                    BlocBuilder<StartInkuCubit, StartInkuState>(
+                      buildWhen: (previous, current) =>
+                          previous != current && current is UpdateIdInku,
                       builder: (context, state) {
-                        // if (1 == 1) {
-                        //   return DropdownButton<String>(
-                        //     value: "super",
-                        //     underline: const SizedBox(),
-                        //     style: const TextStyle(
-                        //         fontSize: 14, color: Colors.black),
-                        //     items: listInku
-                        //         .map((e) =>
-                        //             DropdownMenuItem(value: e, child: Text(e)))
-                        //         .toList(),
-                        //     onChanged: (newValue) {
-                        //       // context.read<HomeBloc>().add(
-                        //       //     DataInkubatorSwitch(id: newValue!));
-                        //     },
-                        //   );
-                        // }
+                        if (state is UpdateIdInku) {
+                          return DropdownButton<String>(
+                            value: "super",
+                            underline: const SizedBox(),
+                            style: const TextStyle(
+                                fontSize: 14, color: Colors.black),
+                            items: state.listInkubators
+                                .map((e) =>
+                                    DropdownMenuItem(value: e, child: Text(e)))
+                                .toList(),
+                            onChanged: (newValue) {
+                              // context.read<StartInkuCubit>().add(
+                              //     Startinku);
+                            },
+                          );
+                        }
                         return TextFieldCustomAll(
-                            title: "Start Date",
-                            textHint: "02/08/2023",
-                            controller: startData);
+                            title: "ID Inkubator",
+                            textHint: "INK0001",
+                            controller: idInku);
                       },
                     ),
                     TextFieldCustomAll(

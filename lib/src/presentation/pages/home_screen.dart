@@ -207,17 +207,14 @@ class _HomeScreenState extends State<HomeScreen>
                             );
                           }
                           return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
+                            onTap: () => Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        BlocProvider<StartInkuCubit>(
-                                          create: (context) => StartInkuCubit()..initCubit(),
-                                          child: const StartInkuPage(),
-                                        )),
-                              );
-                            },
+                                        BlocProvider(
+                                          create: (context) => StartInkuCubit(),
+                                          child: StartInkuPage(),
+                                        ))),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 20, vertical: 20),
