@@ -87,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen>
                               const SizedBox(
                                 width: 5,
                               ),
-                              const Text("ID Inkubator"),
+                              const Text("ID nice"),
                               const SizedBox(
                                 width: 3,
                               ),
