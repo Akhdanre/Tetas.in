@@ -40,7 +40,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<String> loginRequest(LoginRequest user) async {
-    Uri url = Uri.parse("http://${BaseUrl.host}:8000/api/authentication");
+    Uri url = Uri.parse("${BaseUrl.fullApiUrl}/authentication");
     final jsonData = jsonEncode(user.toJson());
 
     try {
@@ -53,10 +53,11 @@ class AuthCubit extends Cubit<AuthState> {
       if (response.statusCode == 200) {
         return response.body;
       } else {
+        print(response.body);
         throw Exception("Failed to authenticate");
       }
     } catch (e) {
-      throw Exception("Failed to communicate with the server");
+      throw Exception("Failed to communicate with the server : $e");
     }
   }
 }
