@@ -60,8 +60,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     children: [
                       Expanded(
                         child: TextField(
-                          decoration: InputDecoration(
-                              border: InputBorder.none, hintText: "lorem"),
+                          decoration: InputDecoration(border: InputBorder.none, hintText: "pencarian"),
                         ),
                       ),
                       Icon(Icons.search)
