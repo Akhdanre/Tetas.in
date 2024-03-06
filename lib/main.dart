@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tetas_in/src/bussines_logic/realtime/background_service.dart';
+// import 'package:tetas_in/src/bussines_logic/realtime/background_service.dart';
 import 'package:tetas_in/src/presentation/pages/splash_screen.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
