@@ -307,14 +307,23 @@ class _EvolutionScreenState extends State<EvolutionScreen> {
                                 description1 = AppLocalizations.of(context)
                                     .day_progress_16_20;
                               }
-                              return Text(
+                              return SizedBox(
+                              height:
+                                  70, // Set the height to your desired value
+                              child: SingleChildScrollView(child : Text(
                                 description1,
                                 textAlign: TextAlign.justify,
-                              );
+                              )));
                             }
-                            return Text(
-                              AppLocalizations.of(context).day_progress_1_2,
-                              textAlign: TextAlign.justify,
+                            return SizedBox(
+                              height:
+                                  70, // Set the height to your desired value
+                              child: SingleChildScrollView(
+                                child: Text(
+                                  AppLocalizations.of(context).day_progress_1_2,
+                                  textAlign: TextAlign.justify,
+                                ),
+                              ),
                             );
                           },
                         ),
